@@ -1,0 +1,224 @@
+<!-- ***********************************************************************************
+* Modifications.                                                                       *
+* **************************************************************************************                                                                        *
+*  Date         Author       PCR No.           Description of change                *
+* **********   **********   **********    ***************************************** *
+* 09/22/2020   X0108356	    PCR031702 		  Initial Version						*
+************************************************************************************ -->
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+		<Dialog
+		id="idNewAssembly"
+		title="{i18n>IBase.NewAssemblyDlgTitle}" 
+		 draggable="false"  resizable="false"
+		stretch="{device>/isPhone}" showHeader="true" class="sapUiSizeCompact">
+			<content>
+				<MessageStrip width="100%" id="idMsgStrip" showIcon="true"
+						showCloseButton="true" close="onCloseMsgBar" class="ibPopMsgStrip">
+				</MessageStrip>
+				<Table id="idChamberPosTable"
+						inset="false"
+						items="{
+							path: 'ibaseChamberSetModel>/d/results',
+							sorter: {
+									path: 'Heqnr'
+								}
+							}"
+						headerText="{i18n>IBase.IbaseStructureTitle}"
+						class="sapUiSmallMarginBottom ibasePopup">
+						<headerToolbar >
+							<OverflowToolbar class="sapUiSizeCompact ibaseToolbar">
+								<content>
+									<Title text="{i18n>IBase.IbaseStructureTitle}"/>
+									<ToolbarSpacer/>
+									<Button id="btnDlgPosChg" text="{i18n>IBase.BtnChangePosition}" visible="false"
+									press="onDialogChangePosition"  class="sapUiSizeCompact btnAddAssembly" ></Button>
+									<Button id="btnDlgPosChgCancel" text="{i18n>IBase.Cancel}" visible="false"
+									 press="onDialogChangePositionCancel"  class="sapUiSizeCompact btnReject" ></Button>
+								
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column hAlign="Center" width="{= ${device>/isNoPhone} ? '35%' : '45%'}">
+								<Text text="{i18n>IBase.LblName}" />
+							</Column>
+							<Column hAlign="Center" width="{= ${device>/isNoPhone} ? '35%' : '45%'}" minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>IBase.LblGotCodeDesc}" />
+							</Column>
+							<Column hAlign="Center">
+								<Text text="{i18n>IBase.LblPosition}" />
+							</Column>
+							<Column hAlign="Center" visible="{IBaseModel>/newPositionColumn}">
+								<Text text="{i18n>IBase.LblNewPosition}" />
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<ObjectIdentifier
+										title="{ibaseChamberSetModel>Equnr}-{ibaseChamberSetModel>Eqktx}"/>
+									<Text
+										text="{ibaseChamberSetModel>GotCodeDesc}" />
+									<Text
+										text="{ibaseChamberSetModel>Heqnr}" />
+									<ComboBox selectedKey="{ibaseChamberSetModel>NewPos}" width="100%" items="{ibaseNewPosListModel>/d/results}" visible="{IBaseModel>/newPositionColumn}">
+										<items>
+											<core:Item text="{ibaseNewPosListModel>AssemblyPosition}" key="{ibaseNewPosListModel>AssemblyPosition}"/>
+										</items>
+									</ComboBox>	
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					
+					<Panel id="addAssemblyPanel" expanded="true" expandable="true" visible="{IBaseModel>/newAssemblyPanel}" width="auto" class="ibasePopup">
+						<headerToolbar>
+							<OverflowToolbar active="true" press="onOverflowToolbarPress">
+								<Title text="{i18n>IBase.NewAssemblyTitle}" class="lightGreyLabel"/>
+								<ToolbarSpacer />
+								
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>					
+							<l:Grid defaultSpan="L6 M12 S12" class="sapUiSmallMarginTop">
+ 		     					<l:content>
+										<FlexBox direction="Column" class="inpFlexMarginBottom">
+											<items>	
+												<Label text="{i18n>IBase.LblObjectType}"  class="lightGreyLabel asteriskIBase" />
+												<ComboBox id="idObjectType" width="100%" selectedKey="" items="{ibaseDropDownModel>/objType}" change="onObjectTypeChange" selectionChange="onObjectTypeChange">
+													<items>
+														<core:Item text="{ibaseDropDownModel>Value}" key="{ibaseDropDownModel>Value}"/>
+													</items>
+												</ComboBox>
+								  			</items>
+										</FlexBox>
+										<FlexBox direction="Column" class="inpFlexMarginBottom" visible="{IBaseModel>/classChamber}">	
+											<items>
+												<Label id="ibLblNewPos" text="{i18n>IBase.LblPosition}"  class="lightGreyLabel asteriskIBase" visible="{IBaseModel>/classChamber}" />
+												<ComboBox id="idNewPos" selectedKey="" width="100%" items="{ibaseNewPosListModel>/d/results}" visible="{IBaseModel>/classChamber}" selectionChange="onIbComboBoxChange">
+													<items>
+														<core:Item text="{ibaseNewPosListModel>AssemblyPosition}" key="{ibaseNewPosListModel>AssemblyPosition}"/>
+													</items>
+												</ComboBox>
+											</items>
+										</FlexBox>
+										<FlexBox direction="Column" class="inpFlexMarginBottom" visible="{IBaseModel>/classChamber}">	
+											<items>
+												<Label id="ibLblGotCode" text="{i18n>IBase.LblGotCode}"  class="lightGreyLabel asteriskIBase" visible="{IBaseModel>/classChamber}"/>
+												<Input id="idGotCode"  valueHelpOnly="true" showValueHelp="true" valueHelpRequest="onGotCodeValueHelp"  editable="true" enabled="true" visible="{IBaseModel>/classChamber}"/>
+											</items>
+										</FlexBox>
+										<FlexBox direction="Column" class="inpFlexMarginBottom" visible="{IBaseModel>/classChamber}">	
+											<items>
+												<Label id="ibLblGotCodeDesc" text="{i18n>IBase.LblGotCodeDesc}"  class="lightGreyLabel" visible="{IBaseModel>/classChamber}"/>
+												<Input id="idGotCodeDesc" enabled="false" visible="{IBaseModel>/classChamber}" />
+											</items>
+										</FlexBox>
+										
+									
+										<FlexBox direction="Column" class="inpFlexMarginBottom" visible="{IBaseModel>/classCleaner}">	
+											<items>
+												<Label id="ibLblCleanerType" text="{i18n>IBase.LblCleanerType}" class="lightGreyLabel asteriskIBase" visible="{IBaseModel>/classCleaner}" />
+												<ComboBox id="idCleanerType" selectedKey="" width="100%" items="{ibaseDropDownModel>/cleanerType/results}" visible="{IBaseModel>/classCleaner}" selectionChange="onIbComboBoxChange">
+													<items>
+														<core:Item text="{ibaseDropDownModel>CharValue}" key="{ibaseDropDownModel>CharValue}"/>
+													</items>	
+												</ComboBox>
+											</items>
+										</FlexBox>
+										
+										<FlexBox direction="Column" class="inpFlexMarginBottom" visible="{IBaseModel>/classPolisher}">	
+											<items>
+												<Label id="ibLblPolishingHead" text="{i18n>IBase.LblPolishingHead}"  class="lightGreyLabel asteriskIBase"  />
+												<ComboBox id="idPolishingHead" selectedKey="" width="100%" items="{ibaseDropDownModel>/polishingHead/results}" selectionChange="onIbComboBoxChange">
+													<items>
+														<core:Item text="{ibaseDropDownModel>CharValue}" key="{ibaseDropDownModel>CharValue}"/>
+													</items>	
+												</ComboBox>
+											</items>
+										</FlexBox>
+										<FlexBox direction="Column" class="inpFlexMarginBottom" visible="{IBaseModel>/classPolisher}">	
+											<items>
+												<Label id="ibLblPlaten1Pad" text="{i18n>IBase.LblPlaten1Pad}"  class="lightGreyLabel"  />
+												<ComboBox id="idPlaten1Pad" selectedKey="" width="100%" items="{ibaseDropDownModel>/platen1Pad/results}" >
+													<items>
+														<core:Item text="{ibaseDropDownModel>CharValue}" key="{ibaseDropDownModel>CharValue}"/>
+													</items>	
+												</ComboBox>
+											</items>
+										</FlexBox>
+										<FlexBox direction="Column" class="inpFlexMarginBottom" visible="{IBaseModel>/classPolisher}">	
+											<items>
+												<Label id="ibLblPlaten2Pad" text="{i18n>IBase.LblPlaten2Pad}"  class="lightGreyLabel"  />
+												<ComboBox id="idPlaten2Pad" selectedKey="" width="100%" items="{ibaseDropDownModel>/platen2Pad/results}" >
+													<items>
+														<core:Item text="{ibaseDropDownModel>CharValue}" key="{ibaseDropDownModel>CharValue}"/>
+													</items>	
+												</ComboBox>
+											</items>
+										</FlexBox>
+										<FlexBox direction="Column" class="inpFlexMarginBottom" visible="{IBaseModel>/classPolisher}">	
+											<items>
+												<Label  id="ibLblPlaten3Pad" text="{i18n>IBase.LblPlaten3Pad}"  class="lightGreyLabel"  />
+												<ComboBox id="idPlaten3Pad" selectedKey="" width="100%" items="{ibaseDropDownModel>/platen3Pad/results}" >
+													<items>
+														<core:Item text="{ibaseDropDownModel>CharValue}" key="{ibaseDropDownModel>CharValue}"/>
+													</items>	
+												</ComboBox>
+											</items>
+										</FlexBox>
+										
+										
+										<FlexBox direction="Column" class="inpFlexMarginBottom" visible="{= (${IBaseModel>/classMetrology} === true || ${IBaseModel>/classPolisher} === true) ? true:false}">	
+											<items>
+												<Label id="ibLblPlaten1" text="{i18n>IBase.LblPlaten1Insitumetrology}"  class="lightGreyLabel"  />
+												<ComboBox id="idPlaten1Insitumetrology" selectedKey="" width="100%" items="{ibaseDropDownModel>/platen1/results}" >
+													<items>
+														<core:Item text="{ibaseDropDownModel>CharValue}" key="{ibaseDropDownModel>CharValue}"/>
+													</items>	
+												</ComboBox>
+											</items>
+										</FlexBox>
+										<FlexBox direction="Column" class="inpFlexMarginBottom" visible="{= (${IBaseModel>/classMetrology} === true || ${IBaseModel>/classPolisher} === true) ? true:false}">	
+											<items>
+												<Label id="ibLblPlaten2" text="{i18n>IBase.LblPlaten2Insitumetrology}"  class="lightGreyLabel"  />
+												<ComboBox id="idPlaten2Insitumetrology" selectedKey="" width="100%" items="{ibaseDropDownModel>/platen2/results}" >
+													<items>
+														<core:Item text="{ibaseDropDownModel>CharValue}" key="{ibaseDropDownModel>CharValue}"/>
+													</items>	
+												</ComboBox>
+											</items>
+										</FlexBox>
+										<FlexBox direction="Column" class="inpFlexMarginBottom" visible="{= (${IBaseModel>/classMetrology} === true || ${IBaseModel>/classPolisher} === true) ? true:false}">	
+											<items>
+												<Label id="ibLblPlaten3" text="{i18n>IBase.LblPlaten3Insitumetrology}"  class="lightGreyLabel"  />
+												<ComboBox id="idPlaten3Insitumetrology" selectedKey="" width="100%" items="{ibaseDropDownModel>/platen3/results}" >
+													<items>
+														<core:Item text="{ibaseDropDownModel>CharValue}" key="{ibaseDropDownModel>CharValue}"/>
+													</items>	
+												</ComboBox>
+											</items>
+										</FlexBox>
+										<FlexBox direction="Column" class="inpFlexMarginBottom" visible="{IBaseModel>/classMetrology}">	
+											<items>
+												<Label id="ibLblInlineMetrology" text="{i18n>IBase.LblInLineMetrology}"  class="lightGreyLabel"  />
+												<ComboBox id="idInLineMetrology" selectedKey="" width="100%" items="{ibaseDropDownModel>/inlineMetrology/results}" >
+													<items>
+														<core:Item text="{ibaseDropDownModel>CharValue}" key="{ibaseDropDownModel>CharValue}"/>
+													</items>	
+												</ComboBox>
+											</items>
+										</FlexBox>
+																			
+								</l:content>	
+				 	 	</l:Grid>
+					</content>
+				</Panel> 
+			</content>
+			<buttons>
+				<Button id="btnCancelNewAssm" width="48%" type="Transparent" text="{i18n>IBase.Close}" press="onNewAssemblyDialogClose"/>
+				<Button id="btnSubmitNewAssm" width="48%" type="Accept"  text="{i18n>IBase.Submit}" press="onNewAssemblyDialogSubmit"/>
+			</buttons>
+	</Dialog>
+</core:FragmentDefinition>

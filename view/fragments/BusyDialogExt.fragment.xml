@@ -1,0 +1,11 @@
+<!-- ****************************************************************************
+* Modifications.                                                                *
+* *******************************************************************************                                                                        *
+*    Date        Author    PCR No.           Description of change              *
+* ********** ************ **********  ***************************************** *
+* 28/12/2017	X087924	  PCR017285 	Disabling Esc key for busy dialog	    *
+********************************************************************************* -->
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:custom="serviceCaseCreation.extensions" xmlns:core="sap.ui.core">
+	<custom:BusyDialogExt text="{/dialogDescription/infoDialogDescription}" />
+</core:FragmentDefinition>

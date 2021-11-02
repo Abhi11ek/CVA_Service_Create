@@ -1,0 +1,52 @@
+<!-- ********************************************************************************** *
+* Modifications.                                                                        *
+* ************************************************************************************  *                                                                     *
+* Ver.No    Date        Author    PCR No.           Description of change               *
+* ****** ********** ************ **********  *****************************************  *
+* V00    13/10/2016   Arunkumar                      Initial version                    *
+*                     Yallampalli 
+*                     (X085367)                                                         *
+*                                                                                       *
+* V01   28/09/2017    X087924    PCR015574    	CR 56 and CR 181 changes. Parts List    *
+* 												filter, search, and sort; sort          *
+* 												confirmed parts display; confirmations  *
+* 												against line items                      *
+* V02  17/11/2017	  X087924	 PCR016459		Other Filters 							*
+
+* V03  30/11/2017	  X087924	 PCR016664		CR 382 changes 							*
+************************************************************************************ -->
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<!-- <ViewSettingsDialog class="viewSettingsDialog" id="filterSettingsDialog" 
+		confirm="onConfirmFilterSettingDialog" resetFilters="onFilterSettingsDialogResetFilters"> -->
+	<ViewSettingsDialog class="viewSettingsDialog" id="filterSettingsDialog" cancel="onInfoDialog"
+		confirm="onConfirmFilterSettingDialog" resetFilters="onFilterSettingsDialogResetFilters">
+
+		<groupItems>
+			<ViewSettingsItem text="{i18n>FilterSetting.customerToolId}"
+				key="Customertoolid" />
+		</groupItems>
+		<groupItems>
+			<ViewSettingsItem text="Service Case Type" key="Servicetypedesc" />
+		</groupItems>
+		<filterItems>
+			<ViewSettingsFilterItem text="{i18n>FilterSetting.status}"
+				key="Orderstatus" multiSelect="true">
+				<items>
+					<ViewSettingsItem text="{i18n>FilterSetting.open}"
+						key="Orderstatus___Contains___Open___X" />
+					<ViewSettingsItem text="Released"
+						key="Orderstatus___Contains___Released___X" />
+					<ViewSettingsItem text="Work Completed"
+						key="Orderstatus___Contains___Work Completed___X" />
+					<ViewSettingsItem text="{i18n>FilterSetting.Other}"
+						key="Other" />
+					<!-- <ViewSettingsItem text="None" key="none" /> --> <!-- V01 -->
+				</items>
+			</ViewSettingsFilterItem>
+		</filterItems>
+	</ViewSettingsDialog>
+
+</core:FragmentDefinition>
+
+

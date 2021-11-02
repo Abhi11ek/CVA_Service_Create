@@ -1,0 +1,650 @@
+<!--************************************************************************************
+* Modifications.                                                                       *
+* *************                                                                        *
+* Ver.No    Date        Author          PCR No.       Description of change          *
+* ************************************************************************************ *
+* V00    13/10/2016   Siva Prasad                            *
+*            Prachuri/Alok    PCR012146   initial version          *
+*                     (X087050)                                                        *
+*                                                                                      *
+*V01  21/11/2017  X087925       PCR016459   Change position of PM Type for *
+*                           preventive Maintenance.      *
+*V02  01/08/2018  X087050       PCR016664   Category for Proj orders new   *
+*                           addition             *
+****************************************************************************************/ 
+************************************************************************
+*  Date        Author    PCR No.          Description of change        *
+************ ********  **********   ************************************
+* 01/18/2018   X087050   PCR017289   Fixedbill mandatory issue         *
+* 01/13/2018   X087924   PCR017437   PBG and Technology fields addition*
+* 07/31/2018   X087924   PCR018422   Pass Down Log and Attachment      *
+*                    changes                              *
+* 10/03/2018   X087924   PCR020161   Indirect Labor Changes           *
+* 11/19/2019   Vimal   PCR020942   KA Project changes               * 
+*             Pandu                                       *
+* 03/02/2020   X0108534  PCR027291   Add the category 3 & Category4     *
+* 03/30/2020   X0108534  PCR027779   Shift pass down fields             *
+* 07/13/2020   X0108534  PCR030427   internal external notes issue      *
+* 01/15/2020   X0106207  PCR029992   SOW ID                             *
+* 08/31/2020   X0108534  PCR030996  ARK URL                            *
+* 09/22/2020   X0108356  PCR031702	 IBase Implementation               *	
+************************************************************************/ -->
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns="sap.m"  xmlns:custom="serviceCaseCreation.extensions"
+  controllerName="serviceCaseCreation.controller.ServiceCaseCreate" xmlns:html="http://www.w3.org/1999/xhtml">
+  <Page title="{i18n>CreateServiceCase.title}" showNavButton="true" navButtonPress="onNavBack" class="appliedTheme" id="serviceCreatePage">
+    <!--Begin of  PCR030996++ -->
+    <customHeader>
+			<Bar>
+				<contentMiddle>
+					<Text text="{i18n>CreateServiceCase.title}"></Text>
+				</contentMiddle>				
+				<contentRight>
+					 <Link wrapping="true" id="arklinkcreate" emphasized="true" class="sapUiVisibleOnlyOnDesktop" text="{i18n>ServiceOrder.ServiceHistory}" enabled="false"  press="openArkUrl"/>     
+				</contentRight>				
+			</Bar>
+	</customHeader>
+	<!--End of  PCR030996++ -->
+    <content>
+      <!-- PCR017437~~ -->
+      <!-- <l:Grid defaultSpan="L4 M12 S12" class="sapUiSmallMarginTop flexBoxBackground"> -->
+      <!-- PCR017437++ -->
+      <l:Grid defaultSpan="L4 M12 S12" class="sapUiSmallMarginTop flexBoxBackground ccGridlayoutTinyMarginBottom">
+        <l:content>
+          <FlexBox direction="Column" class="smallMargin">
+            <items>
+              <Text id="serviceTypelbl" wrapping="true" text="{i18n>CreateServiceCase.ServiceType}" class="lightGreyLabelCC"/>
+              <ComboBox id="ServiceType" placeholder="{i18n>CreateServiceCase.SelectServciceType}" width="100%" selectionChange="onTypeselectionChange">
+                <items>
+                  <core:ListItem key="ZCMO" text="Corrective Maintenance"/>
+                  <core:ListItem key="ZPMO" text="Preventive Maintenance"/>
+                  <core:ListItem key="ZPRJ" text="Project"/>
+                </items>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="smallMargin">
+            <items>
+	            <HBox class="ibViewMarginBottom"> <!--IBase PCR031702++ -->
+		              <Label text="{i18n>CreateServiceCase.CustomerToolID}" width="100%" class="lightGreyLabelCC"/>
+		              
+		               <!-- IBase Begin of PCR031702++ -->
+			          <HBox width="100%" justifyContent="End"  class="ImtViewMarginBottom" visible="{IBaseModel>/custSuggestBtn}">
+				            <Button id="custSuggestBtn" text="{i18n>IBase.ChangeCustTool}" icon="sap-icon://edit"
+								class="sapUiSizeCompact suggestBtnStyle" type="Transparent" press="onPressSuggestionButton">
+								<customData>
+									<core:CustomData key="buttonCust" value="bShowCustSugBtn - bShowCustSugInp"/>
+								</customData>
+							</Button>
+				      </HBox>
+		         	 <HBox id="custSuggest" width="100%" class="ImtViewMarginBottom" height="1.1rem" justifyContent="End" visible="{IBaseModel>/custSuggest}">
+							<Input id="inpCustToolId" placeholder="{i18n>IBase.NewCustTool}" width="auto" class="sapUiSizeCompact suggestInpHeight sapUiSmallMarginBegin"
+								value="" showSuggestion="true" maxLength="30"/>
+							<Button icon="sap-icon://sys-cancel-2" type="Transparent" tooltip="{i18n>IBase.Cancel}" class="sapUiSizeCompact suggestBtnStyle btnReject"  press="onPressSuggestionCancelButton">
+								<customData>
+									<core:CustomData key="buttonCancelCust" value="bShowCustSugBtn - bShowCustSugInp"/>
+								</customData>
+							</Button>
+							<Button icon="sap-icon://paper-plane" type="Transparent" class="sapUiSizeCompact suggestBtnStyle btnSubmit" tooltip="{i18n>IBase.Submit}" press="onPressSuggestionSaveButton">
+								<customData>
+									<core:CustomData key="buttonSaveCust" value="bShowCustSugBtn - bShowCustSugInp"/>
+								</customData>
+							</Button>
+					</HBox>
+						
+				</HBox>
+	          <!-- IBase End of PCR031702++ -->
+          
+              <Input id="createCustomertoolid" width="100%" maxLength="30" placeholder="{i18n>CreateServiceCase.EnterCustomerToolID}" change="onSubmit"
+                liveChange="onCustomerToolIDLiveChange">
+                <layoutData>
+                  <FlexItemData growFactor="1"/>
+                </layoutData>
+                <customData>
+                  <core:CustomData key="cust" value="custToolId"/>
+                </customData>
+              </Input>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="smallMargin">
+            <items>
+              <Label text="{i18n>CreateServiceCase.SerialNumber}" width="100%" class="lightGreyLabelCC"/>
+              <Input id="createSerialno" placeholder="{i18n>CreateServiceCase.EnterSerialNumber}" maxLength="18" change="onSubmit" width="100%"
+                liveChange="onSerialNumberLiveChange">
+                <layoutData>
+                  <FlexItemData growFactor="1"/>
+                </layoutData>
+                <customData>
+                  <core:CustomData key="serial" value="serialNumber"/>
+                </customData>
+              </Input>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="smallMargin">
+            <items>
+              <Label id="fablbl" text="{i18n>CreateServiceCase.FabId}" width="100%" class="lightGreyLabelCC"/>
+              <Input id="createFabid" placeholder="{i18n>CreateServiceCase.EnterFabId}" maxLength="18" change="onSubmit" width="100%"
+                liveChange="onFabIdLiveChange">
+                <layoutData>
+                  <FlexItemData growFactor="1"/>
+                </layoutData>
+                <customData>
+                  <core:CustomData key="fab" value="fabId"/>
+                </customData>
+              </Input>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="smallMargin" id="idMajorAssemblyflex">
+            <items>
+              <HBox class="ibViewMarginBottom"> <!-- IBASE PCR031702++ -->
+                 <Label id="majorAssemblylbl" text="{i18n>CreateServiceCase.MajorAssembly}" width="100%" class="lightGreyLabelCC"/>
+                 <!-- Begin of IBASE PCR031702++ -->
+		            <HBox width="100%" justifyContent="End"  class="ImtViewMarginBottom">
+			             <Button id="assmSuggestBtn" text="{i18n>IBase.LblAddAssembly}" icon="sap-icon://add" visible="{IBaseModel>/assmSuggestBtn}"
+							class="sapUiSizeCompact suggestBtnStyle" type="Transparent" press="onPressSuggestionButton">
+							<customData>
+								<core:CustomData key="buttonAssm" value="bShowAssmSugBtn"/>
+							</customData>
+						 </Button>
+						 <Button id="posSuggestBtn" text="{i18n>IBase.BtnChangePosition}" icon="sap-icon://edit" visible="{IBaseModel>/posSuggestBtn}"
+							class="sapUiSizeCompact suggestBtnStyle" type="Transparent" press="onPressSuggestionButton">
+							<customData>
+								<core:CustomData key="buttonPos" value="bShowPosSugBtn"/>
+							</customData>
+						 </Button>
+				    </HBox>
+			  </HBox>
+          		<!-- End of IBASE PCR031702++ -->
+             
+              <ComboBox id="idEquipmentCombobox" placeholder="{i18n>CreateServiceCase.selectAssembly}" items="{/d/results}" width="100%"
+                selectionChange="onChangeEquipment">
+                <core:Item key="{Assembly}" text="{Assembly}-{Assemblydesc}"/>
+              </ComboBox>
+             </items>
+          </FlexBox>
+          <!-- Start of PCR018422++ changes; malfunction start date-time -->
+          <FlexBox direction="Column" class="smallMargin" id="idCreateMalFuncDtFlxbx">
+            <items>
+              <Label text="{i18n>serviceOrder_MalFuncStrtDt}" class="lightGreyLabelCC asteriskCC"/>
+              <DatePicker id="idCMalFuncStartDateDtpkr" width="100%" valueFormat="dd-MMM-yyyy" displayFormat="dd-MMM-yyyy" change="dateChange">
+                <layoutData>
+                  <FlexItemData growFactor="1"/>
+                </layoutData>
+              </DatePicker>
+            </items>
+          </FlexBox>
+
+
+
+          <FlexBox direction="Column" class="smallMargin" id="idCreateMalFuncTmFlxbx">
+            <items>
+              <Label text="{i18n>serviceOrder_MalFuncStrtTm}" class="lightGreyLabelCC asteriskCC"/>
+              <TimePicker id="idCMalFuncStartTimeTmPkr" displayFormat="HH:mm" valueFormat="HH:mm:ss" width="100%" change="dateChange">
+                <layoutData>
+                  <FlexItemData growFactor="1"/>
+                </layoutData>
+              </TimePicker>
+            </items>
+          </FlexBox>
+          <!-- End of PCR018422++ changes -->
+
+          <!-- Begin of PCR027779++ -->
+          <FlexBox direction="Column" class="smallMargin" id="idExpectedDelFlex" >
+            <items>
+              <Label id="idExpectedDelLabel" text="{i18n>lblExpectedDel}" class="lightGreyLabelCC"/>
+              <DatePicker id="idExpectedDelDP" valueFormat="dd-MMM-yyyy" width="100%" displayFormat="dd-MMM-yyyy" >
+                <layoutData>
+                  <FlexItemData growFactor="1"/>
+                </layoutData>
+              </DatePicker>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="smallMargin" id="idAssemblyStatusFlex">
+            <items>
+              <Label id="idAssemblySatLabel" text="{i18n>lblAssemblySat}" width="100%" class="lightGreyLabelCC"/>
+              <ComboBox id="idAssemblySatCmbx" width="100%" 
+                placeholder="{i18n>placeholderSelect} {i18n>lblAssemblySat}" items="{/masterListSets/assemblyStatus}" >
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+
+          <FlexBox direction="Column" class="smallMargin" id="idCustomerStatusFlex">
+            <items>
+              <Label text="{i18n>lblCustomerStatus}"  width="100%"  class="lightGreyLabelCC"/>
+              <ComboBox id="idCustomerStatusCmbx" width="100%" 
+                placeholder="{i18n>placeholderSelect} {i18n>lblCustomerStatus}"  items="{/masterListSets/custoolStatus}" >
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <!-- End of PCR027779++ -->
+
+          <!-- PCR020942++; adding tool status -->
+          <FlexBox direction="Column" class="smallMargin" id="idToolStatFlex">
+            <items>
+              <Label id="idToolStatLabel" text="{i18n>lblToolStatus}" class="lightGreyLabelCC"/>
+              <ComboBox id="idToolStatCmbx" width="100%" selectionChange="onInputLiveChangeCombox"
+                placeholder="{i18n>placeholderSelect} {i18n>lblToolStatus}" items="{/masterListSets/toolStatus}" change="onInputLiveChangeCombox">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <!-- PCR020942++ -->
+
+
+          <!-- Start of PCR016459 -->
+          <FlexBox id="pmtypeflex" direction="Column" class="sapUiTinyMargin" >
+            <items>
+              <Label id="pmTypelbl" text="{i18n>CreateServiceCase.PMType}" width="100%" class="lightGreyLabelCC"/>
+              <ComboBox id="cidPMType" placeholder="Select PM Type" selectionChange="onChangePmType" width="100%"
+                items="{/masterListSets/pmcatagorization}" change="onInputLiveChangeCombox">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <!-- End of PCR016459 -->
+
+          <!-- Start of PCR029992  -->
+         <FlexBox direction="Column" class="smallMargin">
+            <items>
+              <Label text="{i18n>CreateServiceCase.SOWID}" width="100%" class="lightGreyLabelCC"/>
+              <Input id="crSOWid" width="100%" maxLength="30" placeholder="{i18n>CreateServiceCase.EnterSOWID}">
+                <layoutData>
+                  <FlexItemData growFactor="1"/>
+                </layoutData>
+                <customData>
+                  <core:CustomData key="sow" value="sowId"/>
+                </customData>
+              </Input>
+            </items>
+          </FlexBox>
+       <!-- End of PCR029992++ -->
+
+        </l:content>
+      </l:Grid>
+      <Toolbar class="sapUiTinyMarginTop flexBoxBackground">
+        <Text text="{i18n>CreateServiceCase.Information}" class="tabTitleLabel"/>
+      </Toolbar>
+      <!-- PCR017437~~ -->
+      <!-- <l:Grid defaultSpan="L4 M6 S12" class="flexBoxBackground"> -->
+      <!-- PCR017437++ -->
+      <l:Grid defaultSpan="L4 M6 S12" class="flexBoxBackground ccGridlayoutTinyMarginBottom">
+        <l:content>
+          <FlexBox direction="Column" class="sapUiTinyMargin">
+            <items>
+              <Text wrapping="true" text="{i18n>CreateServiceCase.soldToParty}" class="lightGreyLabelCC"/>
+              <Text id="cidsoldToParty" text="{Soldtopartydescription}"/>
+            </items>
+          </FlexBox>
+          <!-- PCR017437~~ <FlexBox direction="Column" class="sapUiTinyMargin">
+            <items>
+              <Label text="{i18n>CreateServiceCase.Equipment}" width="100%"
+                class="lightGreyLabelCC" />
+              <Text id="chamber" text="{Equipmentdescription}" />
+            </items>
+          </FlexBox>  PCR017437~~ -->
+          <FlexBox direction="Column" class="sapUiTinyMargin">
+            <items>
+              <Label text="{i18n>CreateServiceCase.FabName}" width="100%" class="lightGreyLabelCC"/>
+              <Text id="fabname" text="{Fabnamedescription}"/>
+            </items>
+          </FlexBox>
+
+          <!-- end of PCR017437++  -->
+          <!-- Begin of PCR027779++ -->
+          <FlexBox direction="Column" class="sapUiTinyMargin">
+            <items>
+              <Label text="{i18n>CreateServiceCase.CustomerContactPerson}" width="100%" class="lightGreyLabelCC"/>
+              <Input id="idcuscontpers"   placeholder="{i18n>CreateServiceCase.EnterCustomerContactPerson}"/>
+            </items>
+          </FlexBox>
+          <!-- End of PCR027779++ -->
+        </l:content>
+      </l:Grid>
+      <l:Grid defaultSpan="L4 M6 S12" class="flexBoxBackground ccGridlayoutTinyMarginBottom">
+        <l:content>
+          <FlexBox direction="Column" class="sapUiTinyMargin">
+            <items>
+              <Label text="{i18n>CreateServiceCase.Equipment}" width="100%" class="lightGreyLabelCC"/>
+              <Text id="chamber" text="{Equipmentdescription}"/>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="sapUiTinyMargin">
+            <items>
+              <Label text="{i18n>CreateServiceCase.PBG}" width="100%" class="lightGreyLabelCC"/>
+              <Text text="{Pbg}"/>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="sapUiTinyMargin">
+            <items>
+              <Label text="{i18n>CreateServiceCase.Technology}" width="100%" class="lightGreyLabelCC"/>
+              <Text text="{Technology}"/>
+            </items>
+          </FlexBox>
+          <!-- end of PCR017437++  -->
+          <FlexBox direction="Column" class="sapUiTinyMargin">
+            <items>
+              <Label id="assignTolbl" text="{i18n>CreateServiceCase.AssignedTo}" class="lightGreyLabelCC" width="100%"/>
+              <Input id="assignedto" placeholder="{i18n>CreateServiceCase.EnterAssignedto}" showValueHelp="true" width="100%"
+                valueHelpRequest="assignedPerson" valueHelpOnly="true" liveChange="srNoChange"/>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="smallMargin">
+            <items>
+              <Label id="datePkrlbl" text="{i18n>CreateServiceCase.StartDate}" class="lightGreyLabelCC"/>
+              <DatePicker id="startdatedatepicker" width="100%" valueFormat="dd-MMM-yyyy" secondaryCalendarType="Gregorian"
+                value="{formatter : 'serviceCaseCreation.formatter.formatter.dateFormat'}" change="dateChange"/>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="smallMargin">
+            <items>
+              <Label id="timePkrlbl" text="{i18n>CreateServiceCase.Time*}" class="lightGreyLabelCC"/>
+              <TimePicker id="startTime" width="100%" valueFormat="HH:mm:ss" displayFormat="HH:mm"
+                value="{formatter : 'serviceCaseCreation.formatter.formatter.timeFormat'}" change="dateChange"/>
+            </items>
+            <layoutData>
+              <l:GridData span="L2 M6 S6"/>
+            </layoutData>
+          </FlexBox>
+          <!-- PCR017437~~ -->
+          <!-- <FlexBox direction="Column" class="smallMargin"> -->
+          <!-- PCR017437++ -->
+          <FlexBox direction="Column" class="smallMargin" height="5.5rem">
+            <items>
+              <Label text="{i18n>CreateServiceCase.Zone}" class="lightGreyLabelCC" width="100%"/>
+              <Text id="zone" width="100%" text="{Timezone}"/>
+            </items>
+            <layoutData>
+              <l:GridData span="L1 M6 S6"/>
+            </layoutData>
+          </FlexBox>
+          <FlexBox direction="Column" class="smallMargin">
+            <items>
+              <Text wrapping="true" text="{i18n>ServiceOrder.delay}" class="lightGreyLabelCC"/>
+              <ComboBox id="idDelayCombobox" placeholder="{i18n>ServiceOrder.selectDelayStatus}" items="{/masterListSets/delay}" width="100%">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" id="idNonconfirmflex" class="smallMargin">
+            <items>
+              <Text id="nonConfirmlbl" wrapping="true" text="{i18n>CreateServiceCase.NonConfirm}" class="lightGreyLabelCC"/>
+              <ComboBox id="idNonconfirm" placeholder="{i18n>CreateServiceCase.pleaseenterNonconfirm}" selectionChange="srNoChange"
+                items="{/masterListSets/nonconform}" width="100%" change="onInputLiveChangeCombox">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" id="idWaferScrapflex" class="smallMargin">
+            <items>
+              <Label text="{i18n>CreateServiceCase.WafersScrapCount}" width="100%" class="lightGreyLabelCC"/>
+              <Input id="idWaferScrap" width="100%" type="Number" maxLength="5" placeholder="{i18n>CreateServiceCase.pleaseenterWaferScrapcount}"/>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="smallMargin">
+            <items>
+              <Label id="problemDescriptionlbl" text="{i18n>CreateServiceCase.Description}" class="lightGreyLabelCC"/>
+              <TextArea id="problemDescription" width="100%" placeholder="{i18n>CreateServiceCase.EnterProblemDescription}" liveChange="srNoChange"
+                maxLength="2048"></TextArea>
+            </items>
+            <layoutData>
+              <l:GridData span="L8 M12 S12"/>
+            </layoutData>
+          </FlexBox>
+          <!-- Begin of PCR027779++ -->
+          <!-- Begin of PCR030427~~ -->
+         <!--  <FlexBox direction="Column" class="smallMargin" visible="false">
+            <items>
+                  <Label id="internalnoteslbl" text="{i18n>CreateServiceCase.InternalNotes}" class="lightGreyLabelCC"/>
+                  <TextArea id="internalnotes" width="100%" placeholder="{i18n>CreateServiceCase.EnterInternalNotes}" >
+                     <layoutData>
+                          <FlexItemData growFactor="1"/>
+                      </layoutData>
+                  </TextArea>
+                </items>
+                <layoutData>
+                  <l:GridData span="L6 M12 S12"/>
+                </layoutData>
+          </FlexBox>
+          <FlexBox direction="Column" class="smallMargin" visible="false">
+                <items>
+                  <Label id="externalnoteslbl" text="{i18n>CreateServiceCase.ExternalNotes}" class="lightGreyLabelCC"/>
+                  <TextArea id="externalnotes" width="100%" placeholder="{i18n>CreateServiceCase.EnterExternalNotes}" >
+                    <layoutData>
+                          <FlexItemData growFactor="1"/>
+                      </layoutData>
+                  </TextArea>
+                </items>
+                <layoutData>
+                  <l:GridData span="L6 M12 S12"/>
+                </layoutData>
+          </FlexBox> -->
+      <!-- End of PCR030427~~ -->
+          <!-- End of PCR027779++ -->
+          <FlexBox id="idCurrencyFlex" direction="Column" class="sapUiTinyMargin">
+            <items>
+              <Label id="currencylbl" text="{i18n>CreateServiceCase.Currency}" width="100%" class="lightGreyLabelCC"/>
+              <ComboBox id="idCurrency" selectionChange="onCurrencySelect" width="100%">
+                <items>
+                  <core:Item key="O 50001140" text="USD"/>
+                  <core:Item key="O 50001139" text="RMB"/>
+                </items>
+              </ComboBox>
+            </items>
+          </FlexBox>
+        </l:content>
+      </l:Grid>
+      <Toolbar id="categoryToolbar" class="sapUiTinyMarginTop flexBoxBackground">
+        <Text text="{i18n>CreateServiceCase.Categorization}" class="tabTitleLabel"/>
+      </Toolbar>
+      <!-- PCR017437~~ -->
+      <!-- <l:Grid defaultSpan="L4 M12 S12" class=" flexBoxBackground" id="CategoryGrid"> -->
+      <!-- PCR017437++ -->
+      <l:Grid defaultSpan="L4 M12 S12" class="ccGridlayoutTinyMarginBottom flexBoxBackground" id="CategoryGrid">
+        <l:content>
+          <FlexBox direction="Column" class="sapUiTinyMargin" id="symptomFlex">
+            <items>
+              <HBox>
+                <Label id="symptomlbl" text="{i18n>CreateServiceCase.Symptom}" width="100%" class="lightGreyLabelCC"/>
+                <core:Icon src="sap-icon://hint" size="0.7em" class="symHint" tooltip="{i18n>symHint}"/>
+              </HBox>
+              <!-- Begin of PCR020942++ changes -->
+              <!-- <ComboBox id="CidSymptom" placeholder="{i18n>CreateServiceCase.SelectSymptom}" width="100%" items="{/masterListSets/symptom}"
+                change="onInputLiveChangeCombox" selectionChange="onSymptomSelect">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox> -->
+              <custom:InputMenuExt id="CidSymptom" parentItemsPath="/masterListSets/symptom" visible="false"
+                setParentElementKey="onSymLevelOneSelectionChange" chidItemsPath="/masterListSets/fault" setChildElementKey="onSetSymLevelTwoKey"
+                class="inputMenuMarginTop" parentPopupHeader="{i18n>ServiceOrder.Symptom}"
+                childPopupHeader="{i18n>ServiceOrder.Fault}" placeholder="Select {i18n>CreateServiceCase.Symptom}" />
+              <!-- End of PCR020942++ changes -->
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="sapUiTinyMargin" id="faultFlex">
+            <items>
+              <HBox>
+                <Label id="faultlbl" text="{i18n>CreateServiceCase.Fault}" width="100%" class="lightGreyLabelCC"/>
+                <core:Icon src="sap-icon://hint" size="0.7em" class="symHint" tooltip="{i18n>symHint}"/>
+              </HBox>
+              <ComboBox id="CidFault" placeholder="{i18n>CreateServiceCase.SelectFault}" selectionChange="onChangeCause" width="100%" items="{/masterListSets/aFix}"
+                change="onInputLiveChangeCombox">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <!-- PCR020942++; adding Assembly -->
+          <FlexBox direction="Column" class="smallMargin" id="idAssemblyFlexbox">
+            <items>
+              <Label id="idAssemblyLabel" text="{i18n>lblAssembly}" class="lightGreyLabelCC"/>
+              <ComboBox id="idAssemblyCmbx" width="100%" selectionChange="onInputLiveChangeCombox"
+                placeholder="{i18n>placeholderSelect} {i18n>lblAssembly}" items="{/assemblyListSets/assembly}" change="onInputLiveChangeCombox">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <!-- PCR020942++ -->
+          <FlexBox direction="Column" class="sapUiTinyMargin" id="tierFlex">
+            <items>
+              <Label id="ctierlbl" text="{i18n>CreateServiceCase.Tier}" width="100%" class="lightGreyLabelCC"/>
+              <ComboBox id="CidTier" width="100%" items="{/masterListSets/tier}" change="onInputLiveChangeCombox">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <FlexBox id="categorisationflex" direction="Column" class="sapUiTinyMargin">
+            <items>
+              <Label id="categorizationlbl" text="{i18n>CreateServiceCase.Category}" width="100%" class="lightGreyLabelCC"/>
+              <ComboBox id="CidCategorization" width="100%" selectionChange="onCategorisationChange"
+                placeholder="{i18n>CreateServiceCase.SelectCategorization}" items="{/masterListSets/catagorization}" change="onInputLiveChangeCombox">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="sapUiTinyMargin" id="category2Flex">
+            <items>
+              <Label text="{i18n>CreateServiceCase.category2}" width="100%" id="idCateTwoLabel" class="lightGreyLabelCC"/>
+              <ComboBox id="Cidcategory2" selectionChange="onChangeCause" placeholder="{i18n>CreateServiceCase.SelectCategory}" width="100%" items="{/}"> <!-- PCR027291++  added selectionChange event-->
+                <!-- PCR016664++ -->
+                <!-- PCR016664~~ items="{/masterListSets/category2}"> -->
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <!--++ Begin of PCR027291++ -->
+          <FlexBox direction="Column" class="sapUiTinyMargin" id="category3Flex">
+            <items>
+              <Label text="{i18n>CreateServiceCase.category3}" width="100%" id="idCateThreeLabel" class="lightGreyLabelCC"/>
+              <ComboBox id="Cidcategory3" selectionChange="onChangeCat3" placeholder="{i18n>CreateServiceCase.SelectCategory3}" width="100%" items="{/}">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="sapUiTinyMargin" id="category4Flex">
+            <items>
+              <Label text="{i18n>CreateServiceCase.category4}" width="100%" id="idCateFourLabel" class="lightGreyLabelCC"/>
+              <ComboBox id="Cidcategory4" selectionChange="onChangeCat4" placeholder="{i18n>CreateServiceCase.SelectCategory4}" width="100%" items="{/}">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <!--++ End of PCR027291 ++ -->
+        </l:content>
+      </l:Grid>
+      <!-- Start of PCR016459 Removed PM Type Grid -->
+      <!-- <Toolbar id="categoryToolbar1" class="sapUiTinyMarginTop flexBoxBackground"> 
+        <Text text="{i18n>CreateServiceCase.Category}" class="tabTitleLabel" /> </Toolbar> 
+        <l:Grid defaultSpan="L4 M12 S12" class=" flexBoxBackground" id="PmGrid"> 
+        <l:content> <FlexBox id="pmtypeflex" direction="Column" class="sapUiTinyMargin"> 
+        <items> <Label id="pmTypelbl" text="{i18n>CreateServiceCase.PMType}" width="100%" 
+        class="lightGreyLabelCC" /> <ComboBox id="cidPMType" placeholder="Select 
+        PM Type" selectionChange="onChangePmType" width="100%" items="{/masterListSets/pmcatagorization}" 
+        change="onInputLiveChangeCombox"> <core:Item key="{GuidKey}" text="{KeyValue1}" 
+        /> </ComboBox> </items> </FlexBox> </l:content> </l:Grid> -->
+      <!-- End of PCR016459 -->
+      <Toolbar id="ContractToolbar" class="sapUiTinyMarginTop flexBoxBackground">
+        <Text text="{i18n>CreateServiceCase.Contract/Warranty}" class="tabTitleLabel"></Text>
+      </Toolbar>
+      <!-- PCR017437~~ -->
+      <!-- <l:Grid defaultSpan="L4 M12 S12" class=" flexBoxBackground" id="ContractGrid"> -->
+      <!-- PCR017437++ -->
+      <l:Grid defaultSpan="L4 M12 S12" class="ccGridlayoutTinyMarginBottom flexBoxBackground" id="ContractGrid">
+        <l:content>
+          <FlexBox direction="Column" class="sapUiTinyMargin">
+            <items>
+              <Label text="{i18n>CreateServiceCase.ServiceContract}" width="100%" class="lightGreyLabelCC"/>
+              <Text id="idServiceContract" text="{Servicecontract} {Servicecontractdescription}" wrapping="true"/>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="sapUiTinyMargin">
+            <items>
+              <Label text="{i18n>CreateServiceCase.WarrantyID}" width="100%" class="lightGreyLabelCC"/>
+              <Text id="idWarranty" text="{Warrantyid} {Warrantyiddescription}" wrapping="true"/>
+            </items>
+          </FlexBox>
+        </l:content>
+      </l:Grid>
+      <Toolbar id="PaidServiceToolbar" class="sapUiTinyMarginTop flexBoxBackground">
+        <Text text="{i18n>CreateServiceCase.PaidService}" class="tabTitleLabel"></Text>
+      </Toolbar>
+      <!-- PCR017437~~ -->
+      <!-- <l:Grid defaultSpan="L4 M12 S12" class=" flexBoxBackground sapUiSmallMarginBottom" 
+        id="PaidServiceGrid"> -->
+      <!-- PCR017437++ -->
+      <l:Grid defaultSpan="L4 M12 S12" class=" flexBoxBackground sapUiSmallMarginBottom ccGridlayoutTinyMarginBottom" id="PaidServiceGrid">
+        <l:content>
+          <FlexBox direction="Column" class="smallMargin" id="cidFixbillFlex">
+            <items>
+              <Label text="{i18n>CreateServiceCase.FixedBilling/TandM}" width="100%" class="lightGreyLabelCC"/>
+              <ComboBox id="FixBilling" placeholder="{i18n>CreateServiceCase.SelectFixedBilling/TandM}" width="100%" items="{/masterListSets/TandM}"
+                change="onInputLiveChangeCombox" selectionChange="onChangeFixbilling">
+                <!-- PCR017289++ -->
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="smallMargin" id="cidClassFlex">
+            <items>
+              <Text wrapping="true" text="{i18n>CreateServiceCase.ServiceClassification}" class="lightGreyLabelCC"/>
+              <ComboBox id="Serviceclassification" placeholder="{i18n>CreateServiceCase.SelectServiceClassification}" width="100%"
+                items="{/masterListSets/serviceClassification}" change="onInputLiveChangeCombox">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="smallMargin" id="cidcustPoFlex">
+            <items>
+              <Label text="{i18n>CreateServiceCase.CustomerPONumber}" width="100%" class="lightGreyLabelCC" id="custpoNum"/>
+              <Label text="{i18n>CreateServiceCase.Project/OpportunityNo}" width="100%" class="lightGreyLabelCC" id="oppNo"/>
+              <Input id="CustPo" width="100%" maxLength="35" placeholder="{i18n>CreateServiceCase.EnterCustomerPONumber}"/>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" id="accflex" class="smallMargin"> <!-- PCR020161++; Added Margin style -->
+            <items>
+              <Label wrapping="true" text="{i18n>CreateServiceCase.Acc.AssignmentCat}" class="lightGreyLabelCC"/>
+              <ComboBox id="AccAssign" placeholder="{i18n>CreateServiceCase.SelectAccAssignment}" valueStateText="Plase enter Assign To Field"
+                width="100%" items="{/masterListSets/accountassignment}" change="onInputLiveChangeCombox">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" id="accassignflex" class="smallMargin"> <!-- PCR020161++; Added Margin style -->
+            <items>
+              <Label text="{i18n>CreateServiceCase.AccountAssignment}" width="100%" class="lightGreyLabelCC"/>
+              <Input id="AccountAssignment" width="100%" liveChange="srNoChange" placeholder="{i18n>CreateServiceCase.EnterAccountAssignment}"/>
+            </items>
+          </FlexBox>
+        </l:content>
+      </l:Grid>
+      <!-- PCR017437~~ -->
+      <!-- <l:Grid defaultSpan="L4 M12 S12" class="flexBoxBackground" id="PaidServiceGrid1"> -->
+      <!-- PCR017437++ -->
+      <l:Grid defaultSpan="L4 M12 S12" class="flexBoxBackground ccGridlayoutTinyMarginBottom" id="PaidServiceGrid1">
+        <l:content>
+          <FlexBox direction="Column" class="smallMargin" id="accflex1">
+            <items>
+              <Label wrapping="true" text="{i18n>CreateServiceCase.Acc.AssignmentCat}" class="lightGreyLabelCC"/>
+              <ComboBox id="AccAssign1" placeholder="{i18n>CreateServiceCase.SelectAccAssignment}" valueStateText="Plase enter Assign To Field"
+                width="100%" items="{/masterListSets/accountassignment}" change="onInputLiveChangeCombox">
+                <core:Item key="{GuidKey}" text="{KeyValue1}"/>
+              </ComboBox>
+            </items>
+          </FlexBox>
+          <FlexBox direction="Column" class="smallMargin" id="cidcustPoFlex1">
+            <items>
+              <Label text="{i18n>CreateServiceCase.Project/OpportunityNo}" width="100%" class="lightGreyLabelCC" id="oppNo1"/>
+              <Input id="CustPo1" width="100%" maxLength="35" liveChange="srNoChange" placeholder="{i18n>CreateServiceCase.EnterOpportunityNumber}"/>
+            </items>
+          </FlexBox>
+        </l:content>
+      </l:Grid>
+    </content>
+    <footer>
+      <Bar>
+        <contentRight>
+          <Button id="serviceOrderUpdateBtn" text="Save" type="Emphasized" class="sapUiTinyMarginEnd" width="8rem" press="onCreate"/>
+          <Button id="serviceOrderCancelBtn" text="Cancel" class="sapUiTinyMarginEnd" press="onCancel" width="6rem"/>
+        </contentRight>
+      </Bar>
+    </footer>
+  </Page>
+</core:View>

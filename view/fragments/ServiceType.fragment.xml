@@ -1,0 +1,28 @@
+<!-- ************************************************************************
+ *    Date  	Author    		PCR No.     Description of change			*
+ * **********	************	*********	******************************* *
+ * 12/01/2020	Vimal Pandu    	PCR032539   PSE Sprint 10 changes			*
+ * 05/27/2021   X089025         PCR035464   Upgrade issue resolution        *
+ * *********************************************************************** -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<ActionSheet title="Service Type" showCancelButton="true" placement="Bottom" class="rtenTrpBtnStyle">                                                    <!-- PCR035464++; class added -->
+		<buttons>
+			<Button text="{i18n>pse.CMO}" press="onPressNavToAGSCreate">
+				<customData>
+					<core:CustomData key="ServiceType" value="ZCMO"/>
+				</customData>
+			</Button>
+			<Button text="{i18n>pse.PMO}" press="onPressNavToAGSCreate">
+				<customData>
+					<core:CustomData key="ServiceType" value="ZPMO"/>
+				</customData>
+			</Button>
+			<Button text="{i18n>pse.PRJ}" press="onPressNavToAGSCreate">
+				<customData>
+					<core:CustomData key="ServiceType" value="ZPRJ"/>
+				</customData>
+			</Button>
+			<Button text="{i18n>pse.PSE}" press="onPressNavToPSECreate"/>
+		</buttons>
+	</ActionSheet>
+</core:FragmentDefinition>

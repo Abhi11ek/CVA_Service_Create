@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{/dialogDescription/infoDialogTitle}"
+		contentWidth="30%" contentHeight="{= ${device>/isPhone} ? '21%' : '20%' }" afterClose="onInfoDialog1">
+		<FlexBox direction="Column" alignItems="Center"
+			justifyContent="SpaceAround" fitContainer="true">
+			<items>
+				<core:Icon src="{/dialogDescription/infoDialogIconSrc}"
+					color="{/dialogDescription/infoDialogIconColor}" size="3em" />
+				<Text text="{/dialogDescription/infoDialogDescription}"
+					wrapping="true" class="sapUiTinyMargin" />
+			</items>
+		</FlexBox>
+		<beginButton>
+			<Button text="Ok" width="98%" press="onInfoDialog1" />
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,62 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>AssignedTo.userDetails}" afterClose="onCancelAssignedTo">
+
+		<FlexBox class="advanceSearchFlexBox" direction="Column"
+			fitContainer="true">
+			<FlexBox alignItems="Center" justifyContent="Center">
+				<items>
+					<!-- <Label text="{i18n>assignedTo}" class="labelColorBlack" /> -->
+				</items>
+			</FlexBox>
+			<FlexBox direction="Column" class="smallMargin">
+				<items>
+					<Label text="{i18n>AssignedTo.firstName}" class="labelColorBlack" />
+					<Input id="firstName" placeholder="{i18n>AssignedTo.enterFirstName}"
+						maxLength="40">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Input>
+				</items>
+			</FlexBox>
+			<FlexBox alignItems="Center" justifyContent="Center">
+				<items>
+					<!-- <Label text="{i18n>AdvanceSearch}" class="labelColorBlack" /> -->
+				</items>
+			</FlexBox>
+			<FlexBox direction="Column" class="smallMargin">
+				<items>
+					<Label text="{i18n>AssignedTo.lastName}" class="labelColorBlack" />
+					<Input id="lastName" placeholder="{i18n>AssignedTo.enterLastName}"
+						maxLength="40">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Input>
+				</items>
+			</FlexBox>
+
+			<FlexBox direction="Column" class="smallMargin">
+				<items>
+					<Label text="{i18n>AssignedTo.userId}" class="labelColorBlack" />
+					<Input id="userdId" placeholder="{i18n>AssignedTo.enterUserId}"
+						maxLength="12">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Input>
+				</items>
+			</FlexBox>
+		</FlexBox>
+		<beginButton>
+			<Button text="{i18n>AssignedTo.ok}" press="onAssignedTo"
+				class="sapUiTinyMarginEnd" />
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>AssignedTo.cancel}" press="onCancelAssignedTo"
+				class="sapUiTinyMarginEnd" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

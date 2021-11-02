@@ -1,0 +1,41 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>AssignedTo.Result}" afterClose="cancelAssignedResult">
+		<content>
+			<Table id="assignedSearchResult" mode="SingleSelectMaster"
+				items="{/d/results}" selectionChange="onAssignedToResultSelectionChange"
+				select="onAssignedToResultSelectionChange">
+				<!-- <headerToolbar> <Toolbar> <Title text="Results"> </Title> </Toolbar> 
+					</headerToolbar> -->
+				<columns>
+					<Column>
+						<Label text="First Name" />
+
+					</Column>
+					<Column>
+						<Label text="Last Name" />
+					</Column>
+					<Column>
+						<Label text="User ID" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{Firstname}"></Text>
+							<Text text="{Lastname}"></Text>
+							<Text text="{Userid}"></Text>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<beginButton>
+			<Button text="{i18n>AssignedTo.ok}" press="onSelectAssignedName"></Button>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>AssignedTo.cancel}" press="cancelAssignedResult"></Button>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

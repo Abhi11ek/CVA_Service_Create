@@ -1,0 +1,60 @@
+<!-- ***********************************************************************************
+* Modifications.                                                                       *
+* **************************************************************************************                                                                        *
+*  Date         Author       PCR No.           Description of change               *
+* **********  ***********   **********     *************************************** *
+* 09/22/2020    X0108356	 PCR031702 		  Initial Version				       *
+************************************************************************************ -->
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="ibaseGotCodeSearchDialog"
+		title="{i18n>IBase.GotCodeDlgTitle}" stretch="{device>/isPhone}"
+		contentWidth="30%" contentHeight="50%" draggable="true" 
+		resizable="false" showHeader="true" class="sapUiSizeCompact">
+		<customHeader>
+			<Bar>
+				<contentMiddle>
+					<Title text="{i18n>IBase.GotCodeDlgTitle}"></Title>
+				</contentMiddle>
+				<contentRight>
+					<Button icon="sap-icon://decline" press="onGotCodeSearchDialogClose" tooltip="close"></Button>
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<content>
+			<SearchField id="idGotCodeSearchField" search="onGotCodeSearch" width="98%" maxLength="40" placeholder="{i18n>IBase.GotCodeSrchPlaceholder}" />
+			<MessageStrip width="100%" id="idMsgStrip2" showIcon="true" visible="false"
+				showCloseButton="true" close="onCloseMsgBar" class="ibPopMsgStrip sapUiSizeCompact">
+			</MessageStrip>
+			<Table id="idGotCodeTable"
+						inset="false" mode="SingleSelectMaster"
+						items="{
+							path: 'ibaseGotCodeModel>/d/results'
+							}"
+						class="ibasePopup" showHeader="false" noDataText="{i18n>IBase.GotCodeNoDataTxt}"
+						selectionChange="onGotCodeSelect">
+				
+						<columns>
+							<Column hAlign="Center" width="25%">
+								<Text text="{i18n>IBase.LblGotCode}" />
+							</Column>
+							<Column hAlign="Center">
+								<Text text="{i18n>IBase.LblGotCodeDesc}" />
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem >
+								<cells>
+									<ObjectIdentifier
+										title="{ibaseGotCodeModel>GotCode}"/>
+									<Text
+										text="{ibaseGotCodeModel>GotCodeDesc}" />
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+		
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

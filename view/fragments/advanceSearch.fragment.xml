@@ -1,0 +1,219 @@
+<!-- ***********************************************************************************
+* Modifications.                                                                       *
+* **************************************************************************************                                                                        *
+* Ver.No    Date        Author    PCR No.           Description of change              *
+* ****** ********** ************ **********  ***************************************** *
+* V00	28/12/2017	  X087924	 PCR016664 		Cancel Button for default search query *
+*												Adv. search modifications
+************************************************************************************ -->
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog showHeader="false" afterClose="onInfoDialog"
+		contentHeight="80%" stretch="{device>/isPhone}">
+		<NavContainer id="idAdvanceSearchNavCon" initialPage="advanceSearchPage">
+			<Page id="advanceSearchPage" title="{i18n>AdvanceSearch.advanceSearch}"
+				class="ErrorDialogListBackground">
+				<FlexBox class="advanceSearchFlexBox" direction="Column">
+					<FlexBox direction="Column" class="smallMargin">
+						<items>
+							<Label text="{i18n>AdvanceSearch.serviceCaseNumber}" class="labelColorBlack" />
+							<Input id="idAdvServiceCaseNumber" placeholder="{i18n>AdvanceSearch.enterServiceCaseNumber}"
+								type="Tel" liveChange="handleNumberInputValue" maxLength="10" submit="onAdvanceSearchDashboard">
+								<layoutData>
+									<FlexItemData growFactor="1" />
+								</layoutData>
+							</Input>
+						</items>
+					</FlexBox>
+					<FlexBox alignItems="Center" justifyContent="Center">
+						<items>
+							<Label text="{i18n>AdvanceSearch.or}" class="labelColorBlack" />
+						</items>
+					</FlexBox>
+					<FlexBox direction="Column" class="smallMargin">
+						<items>
+							<Label text="{i18n>AdvanceSearch.legacyNumber}" class="labelColorBlack" />
+							<Input id="idLegacyNumber" placeholder="{i18n>AdvanceSearch.enterLegacyNumber}"
+								type="Tel" liveChange="handleNumberInputValue" maxLength="12" submit="onAdvanceSearchDashboard">
+								<layoutData>
+									<FlexItemData growFactor="1" />
+								</layoutData>
+							</Input>
+						</items>
+					</FlexBox>
+					<FlexBox alignItems="Center" justifyContent="Center">
+						<items>
+							<Label text="{i18n>AdvanceSearch.or}" class="labelColorBlack" />
+						</items>
+					</FlexBox>
+					<FlexBox direction="Column" class="smallMargin">
+						<items>
+							<Label text="{i18n>AdvanceSearch.opportunityNo}" class="labelColorBlack" />
+							<Input id="idOpportunityNumber" placeholder="{i18n>AdvanceSearch.enterOpportunityNumber}"
+								type="Text" maxLength="35" submit="onAdvanceSearchDashboard"> 
+								<layoutData>
+									<FlexItemData growFactor="1" />
+								</layoutData>
+							</Input>
+						</items>
+					</FlexBox>
+					<FlexBox alignItems="Center" justifyContent="Center">
+						<items>
+							<Label text="{i18n>AdvanceSearch.or}" class="labelColorBlack" />
+						</items>
+					</FlexBox>
+					<FlexBox direction="Column" class="smallMargin">
+						<items>
+							<Label text="{i18n>AdvanceSearch.customerToolId}" class="labelColorBlack" />
+							<Input id="idToolNumber" placeholder="{i18n>AdvanceSearch.enterToolNumber}"
+								maxLength="30" submit="onAdvanceSearchDashboard">
+								<layoutData>
+									<FlexItemData growFactor="1" />
+								</layoutData>
+							</Input>
+						</items>
+					</FlexBox>
+					<FlexBox alignItems="Center" justifyContent="Center">
+						<items>
+							<Label text="{i18n>AdvanceSearch.or}" class="labelColorBlack" />
+						</items>
+					</FlexBox>
+					<FlexBox direction="Column" class="smallMargin">
+						<items>
+							<Label text="{i18n>AdvanceSearch.serialNumber}" class="labelColorBlack" />
+							<Input id="idSerialNumber" placeholder="{i18n>AdvanceSearch.enterSerialNumber}"
+								maxLength="30" submit="onAdvanceSearchDashboard">
+								<layoutData>
+									<FlexItemData growFactor="1" />
+								</layoutData>
+							</Input>
+						</items>
+					</FlexBox>
+					<FlexBox alignItems="Center" justifyContent="Center">
+						<items>
+							<Label text="{i18n>AdvanceSearch.or}" class="labelColorBlack" />
+						</items>
+					</FlexBox>
+					<FlexBox direction="Column" class="smallMargin">
+						<items>
+							<Label text="{i18n>AdvanceSearch.employeeId}" class="labelColorBlack" />
+							<Input id="idEmployeeID" placeholder="{i18n>AdvanceSearch.enterEmployeeId}"
+								valueHelpRequest="assignedPerson" valueHelpOnly="true"
+								showValueHelp="true" type="">
+								<layoutData>
+									<FlexItemData growFactor="1" />
+								</layoutData>
+							</Input>
+						</items>
+					</FlexBox>
+				</FlexBox>
+				<footer>
+					<Toolbar>
+						<Button text="{i18n>AdvanceSearch.search}" press="onAdvanceSearchDashboard"
+							width="48%" />
+						<Button text="{i18n>AdvanceSearch.cancel}" press="onInfoDialog"
+							width="48%">
+							<customData>
+								<core:CustomData key="advSearchCancel" value="button"></core:CustomData>
+							</customData>
+						</Button>
+					</Toolbar>
+				</footer>
+			</Page>
+			<Page id="assignedToPage" title="{i18n>AssignedTo.userDetails}"
+				showNavButton="true" navButtonPress="onUserDetailsNavBack">
+				<FlexBox class="advanceSearchFlexBox" direction="Column"
+					fitContainer="true">
+					<FlexBox direction="Column" class="smallMargin">
+						<items>
+							<Label text="{i18n>AssignedTo.firstName}" class="labelColorBlack" />
+							<Input id="firstName" placeholder="{i18n>AssignedTo.enterFirstName}"
+								maxLength="40">
+								<layoutData>
+									<FlexItemData growFactor="1" />
+								</layoutData>
+							</Input>
+						</items>
+					</FlexBox>
+					<FlexBox direction="Column" class="smallMargin">
+						<items>
+							<Label text="{i18n>AssignedTo.lastName}" class="labelColorBlack" />
+							<Input id="lastName" placeholder="{i18n>AssignedTo.enterLastName}"
+								maxLength="40">
+								<layoutData>
+									<FlexItemData growFactor="1" />
+								</layoutData>
+							</Input>
+						</items>
+					</FlexBox>
+					<FlexBox direction="Column" class="smallMargin">
+						<items>
+							<Label text="{i18n>AssignedTo.userId}" class="labelColorBlack" />
+							<Input id="userdId" placeholder="{i18n>AssignedTo.enterUserId}"
+								maxLength="12">
+								<layoutData>
+									<FlexItemData growFactor="1" />
+								</layoutData>
+							</Input>
+						</items>
+					</FlexBox>
+				</FlexBox>
+				<footer>
+					<Toolbar>
+						<Button text="{i18n>AdvanceSearch.search}" press="onAssignedTo" width="48%" />
+						<Button text="{i18n>AdvanceSearch.cancel}" press="onInfoDialog" width="48%">
+							<customData>
+								<core:CustomData key="advSearchCancel" value="button"></core:CustomData>
+							</customData>
+						</Button>
+					</Toolbar>
+				</footer>
+			</Page>
+			<Page id="assignedToResults" title="{i18n>AssignedTo.Result}"
+				showNavButton="true" navButtonPress="onUserDetailsNavBack">
+				<MessageStrip
+					visible="{=${/d/results}.length === 1 ? false : true}"
+					text="{i18n>AdvanceSearch.tapOnUserID}"
+					type="Information"
+					showIcon="true"
+					class="sapUiTinyMargin">
+				</MessageStrip>
+				<Table id="assignedSearchResult" mode="SingleSelectMaster"
+					items="{/d/results}" selectionChange="onAssignedToResultSelectionChange"
+					select="onAssignedToResultSelectionChange">
+					<columns>
+						<Column>
+							<Label text="{i18n>AssignedTo.firstName}" />
+						</Column>
+						<Column>
+							<Label text="{i18n>AssignedTo.lastName}" />
+						</Column>
+						<Column>
+							<Label text="{i18n>AssignedTo.userId}" />
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Firstname}"></Text>
+								<Text text="{Lastname}"></Text>
+								<Text text="{Userid}"></Text>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				<footer>
+					<Toolbar>
+						<Button id="employeeResultsOkBtn" text="{i18n>AssignedTo.ok}" press="onSelectAssignedName" width="48%" />
+						<Button text="{i18n>AdvanceSearch.cancel}" press="onInfoDialog" width="48%">
+							<customData>
+								<core:CustomData key="advSearchCancel" value="button"></core:CustomData>
+							</customData>
+						</Button>
+					</Toolbar>
+				</footer>
+			</Page>
+		</NavContainer>
+	</Dialog>
+</core:FragmentDefinition>

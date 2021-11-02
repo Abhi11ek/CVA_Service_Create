@@ -1,0 +1,156 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="serviceCaseCreation.controller.AdvanceSearch"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="{i18n>AdvanceSearch.titleCaseCreate}" showNavButton="true"
+		navButtonPress="onNavBack" class="appliedTheme">
+		<content>
+			<FlexBox class="advanceSearchFlexBox" direction="Column">
+				<FlexBox alignItems="Center" height="2.5rem" justifyContent="Center"
+					class="advanceTitleFlexBox">
+					<items>
+						<Label text="{i18n>AdvanceSearch.advanceSearch}" class="labelColorBlack" />
+					</items>
+				</FlexBox>
+				<FlexBox direction="Column" class="smallMargin">
+					<items>
+						<Label text="{i18n>AdvanceSearch.serviceCaseNumber}" class="labelColorBlack" />
+						<Input id="idServiceCaseNumber" placeholder="{i18n>AdvanceSearch.enterServiceCaseNumber}"
+							submit="onAdvanceSearch" type="Tel" liveChange="handleNumberInputValue"
+							maxLength="10">
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Input>
+					</items>
+				</FlexBox>
+				
+				<FlexBox alignItems="Center" justifyContent="Center">
+					<items>
+						<Label text="{i18n>AdvanceSearch.or}" class="labelColorBlack" />
+					</items>
+				</FlexBox>
+				<FlexBox direction="Column" class="smallMargin">
+					<items>
+						<Label text="{i18n>AdvanceSearch.legacyNumber}" class="labelColorBlack" />
+						<Input id="idLegacyNumber" placeholder="{i18n>AdvanceSearch.enterLegacyNumber}"
+							 type="Tel" liveChange="handleNumberInputValue"
+							maxLength="12" >
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Input>
+					</items>
+				</FlexBox>
+				
+				<FlexBox alignItems="Center" justifyContent="Center">
+					<items>
+						<Label text="{i18n>AdvanceSearch.or}" class="labelColorBlack" />
+					</items>
+				</FlexBox>
+				<FlexBox direction="Column" class="smallMargin">
+					<items>
+						<Label text="{i18n>AdvanceSearch.opportunityNo}" class="labelColorBlack" />
+						<Input id="idOpportunityNumber" placeholder="{i18n>AdvanceSearch.enterOpportunityNumber}"
+							 type="Text" 
+							maxLength="35" > <!-- liveChange="handleNumberInputValue" -->
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Input>
+					</items>
+				</FlexBox>
+				<FlexBox alignItems="Center" justifyContent="Center">
+					<items>
+						<Label text="{i18n>AdvanceSearch.or}" class="labelColorBlack" />
+					</items>
+				</FlexBox>
+				<!-- <FlexBox width="100%" justifyContent="Center">
+					<items>
+						<FlexBox width="49%" direction="Column" class="smallMargin">
+							<items>
+								<Text wrapping="true" text="{i18n>AdvanceSearch.startDate}"
+									class="labelColorBlack" />
+								<DatePicker width="100%" id="idStartDate"
+									secondaryCalendarType="Gregorian" placeholder="{i18n>AdvanceSearch.SelectStartDate}"
+									change="handleDateChange" valueFormat="dd-MMM-yyyy">
+									<customData>
+										<core:CustomData key="startDate" value="true" />
+									</customData>
+								</DatePicker>
+							</items>
+						</FlexBox>
+						<FlexBox width="49%" direction="Column" class="smallMargin">
+							<items>
+								<Text wrapping="true" text="{i18n>AdvanceSearch.endDate}"
+									class="labelColorBlack" />
+								<DatePicker width="100%" id="idEndDate"
+									secondaryCalendarType="Gregorian" placeholder="{i18n>AdvanceSearch.SelectEndDate}"
+									change="handleDateChange" valueFormat="dd-MMM-yyyy">
+									<customData>
+										<core:CustomData key="endDate" value="true" />
+									</customData>
+								</DatePicker>
+							</items>
+						</FlexBox>
+					</items>
+				</FlexBox> -->
+				<FlexBox direction="Column" class="smallMargin">
+					<items>
+						<Label text="{i18n>AdvanceSearch.customerToolId}" class="labelColorBlack" />
+						<Input id="idToolNumber" placeholder="{i18n>AdvanceSearch.enterToolNumber}"
+							maxLength="30">
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Input>
+					</items>
+				</FlexBox>
+				<FlexBox alignItems="Center" justifyContent="Center">
+					<items>
+						<Label text="{i18n>AdvanceSearch.or}" class="labelColorBlack" />
+					</items>
+				</FlexBox>
+				<FlexBox direction="Column" class="smallMargin">
+					<items>
+						<Label text="{i18n>AdvanceSearch.serialNumber}" class="labelColorBlack" />
+						<Input id="idSerialNumber" placeholder="{i18n>AdvanceSearch.enterSerialNumber}"
+							maxLength="30">
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Input>
+					</items>
+				</FlexBox>
+
+				<FlexBox alignItems="Center" justifyContent="Center">
+					<items>
+						<Label text="{i18n>AdvanceSearch.or}" class="labelColorBlack" />
+					</items>
+				</FlexBox>
+				<FlexBox direction="Column" class="smallMargin">
+					<items>
+						<Label text="{i18n>AdvanceSearch.employeeId}" class="labelColorBlack" />
+						<Input id="idEmployeeID" placeholder="{i18n>AdvanceSearch.enterEmployeeId}"
+							valueHelpRequest="assignedPerson" valueHelpOnly="true"
+							showValueHelp="true" type="">
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Input>
+					</items>
+				</FlexBox>
+			</FlexBox>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button type="Emphasized" text="{i18n>AdvanceSearch.search}"
+						press="onAdvanceSearch" width="8rem" class="sapUiTinyMarginEnd" />
+					<Button text="{i18n>AdvanceSearch.cancel}" press="onCancelSearch"
+						width="6rem" class="sapUiTinyMarginEnd" />
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</core:View>
+

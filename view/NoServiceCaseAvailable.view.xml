@@ -1,0 +1,18 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="serviceCaseCreation.controller.BaseController"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="No Service Case Available" class="appliedTheme">
+		<content>
+			<FlexBox class="advanceSearchFlexBox sapUiTinyMargin"
+				fitContainer="true" direction="Column" justifyContent="Center"
+				alignItems="Center">
+				<items>
+					<core:Icon src="sap-icon://message-information" size="4.5em"
+						color="#cccccc" class="sapUiSmallMargin" />
+					<Text text="Service Cases are not Available"
+						class="sapUiMediumMarginBegin noServiceCaseAvailableContainerText " />
+				</items>
+			</FlexBox>
+		</content>
+	</Page>
+</core:View>

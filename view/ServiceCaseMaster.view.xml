@@ -1,0 +1,197 @@
+<!--************************************************************************************
+* Modifications.                                                                       *
+* *************                                                                        *
+* Ver.No    Date       Author   	    PCR No.         Description of change          *
+* ************************************************************************************ *
+* V00    13/10/2016   Siva Prasad 													   *
+* 					Prachuri/Alok 		PCR012146		initial version				   *
+*                     (X087050)                                                        *
+*                                                                                      *
+* V01	01/10/2018	  X087924			PCR016664		Adding id for the page - scroll*
+*														issue on reset 				   *			
+****************************************************************************************/ 
+*************************************************************************
+*  Date        Author    	PCR No.     Description of change        	*
+************ ********  		**********  *********************************
+* 01/30/2018   X087924   	PCR017285   Display Fab Name                *
+* 11/06/2018   X087924   	PCR018233   Tech and Part Esc Flags         *
+* 02/01/2019   Vimal Pandu	PCR020942   Sorting Service cases list      * 
+* 12/18/2020   Vimal Pandu 	PCR032539  	PSE Sprint-10 changes 			* 
+************************************************************************/--> 
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="serviceCaseCreation.controller.ServiceCaseMaster"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<!-- <Page showNavButton="false" class="appliedTheme"> -->
+	<Page showNavButton="false" class="appliedTheme" id="serviceCaseMaster">
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Button icon="sap-icon://nav-back" press="onNavToFLPHomeBtnPress" />
+				</contentLeft>
+				<contentMiddle>
+					<Title id="dashboardTitle" />
+				</contentMiddle>
+				<contentRight>
+					<Button id="CreateBut" icon="sap-icon://add" text="Create"
+						press="onCreate" />
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<subHeader>
+			<Bar class="sapUiTinyMarginTop">
+				<contentMiddle>
+					<SearchField id="searchField" class="dashboardSearchField"
+						showRefreshButton="false" search="handleSearch"
+						placeholder="{i18n>DashBoard.searchByServiceCase}" tooltip="{i18n>DashBoard.searchServiceCase}"
+						liveChange="handleSearch">
+					</SearchField>
+				</contentMiddle>
+			</Bar>
+		</subHeader>
+		<content>
+			<FlexBox class="masterListFlexBox" direction="Column">
+				<items>
+					<!-- PCR020942~~ --><!-- items="{path: '/d/results' , sorter : { path: 'Servicecasenumber', descending: true}}" -->
+					<List id="SorderstList"
+						items="{/d/results}"
+						mode="{device>/listMode}" noDataText=" " growing="true"
+						growingScrollToLoad="true" updateFinished="onUpdateFinished"
+						selectionChange="onSelectionChange">
+						<items>
+							<CustomListItem type="Navigation"
+								class="objectListItem sapUiTinyMarginTop" press="onSelectionChange">
+								<content>
+									<FlexBox width="100%" direction="Column" class="smallPaddingAll">
+										<items>
+											<!-- PCR018233; Adding Flag for Part and Labor Esc -->
+											<!-- <FlexBox width="100%"> <items> <FlexBox width="65%"> <items> 
+												<ObjectStatus class="serviCaseHighlight miniMargin" text="{path : 'Servicetype', 
+												formatter : 'serviceCaseCreation.formatter.formatter.serviceCaseType'}" /> 
+												<Label text="{Servicecasenumber}" class="serviceOrderListSVoCreate miniMargin" 
+												/> <core:Icon src="sap-icon://mirrored-task-circle-2" class="miniMargin" 
+												color="#009DE0" visible="{=${LegacyOrdNo} ? true : false}" /> <ObjectStatus 
+												class="miniMargin" icon="sap-icon://flag" state="Error" visible="{=${Escalation} 
+												=== 'X' ? true : false}" /> </items> </FlexBox> <FlexBox width="35%" height="1.35rem" 
+												alignItems="Center"> <items> <ObjectStatus text="{Orderstatus}" class="sapUiTinyMarginBegin" 
+												state="{path : 'Orderstatus', formatter : 'serviceCaseCreation.formatter.formatter.status'}" 
+												/> </items> </FlexBox> </items> </FlexBox> -->
+											<FlexBox width="100%" alignItems="Center" height="2.35rem">
+												<items>
+													<FlexBox justifyContent="Start" width="100%">
+														<items>
+														<!-- Start of PCR032539++ changes -->
+															<!-- <ObjectStatus class="serviCaseHighlight miniMargin"
+																text="{path : 'Servicetype', formatter : 'serviceCaseCreation.formatter.formatter.serviceCaseType'}" /> -->
+																<ObjectStatus class="serviCaseHighlight miniMargin"
+																text="{parts: [{path : 'Servicetype'}, {path : 'PSECaseFlag'}], formatter : 'serviceCaseCreation.formatter.formatter.serviceCaseType'}" />
+															<!-- End of PCR032539++ changes -->
+															<Label text="{Servicecasenumber}" class="serviceOrderListSVoCreate miniMargin" />
+														</items>
+													</FlexBox>
+													<FlexBox justifyContent="Start" width="70%">
+														<items>
+															<ObjectStatus text="{Orderstatus}" class="sapUiTinyMarginBegin"
+																state="{path : 'Orderstatus', formatter : 'serviceCaseCreation.formatter.formatter.status'}" />
+														</items>
+													</FlexBox>
+												</items>
+											</FlexBox>
+											<!-- <FlexBox width="100%"> <items> <FlexBox width="40%" alignItems="Center"> -->
+											<FlexBox width="100%" class="svMasterListLabels">
+												<items>
+													<FlexBox width="43%" alignItems="End" height="1.3rem">
+														<!-- End of PCR018233 changes -->
+														<items>
+															<Label text="{i18n>DashBoard.customerToolId}"
+																class="SvoListLabel" />
+														</items>
+													</FlexBox>
+													<!-- <FlexBox width="60%"> --> <!-- PCR018233~~ -->
+													<FlexBox width="57%"> <!-- PCR018233++ -->
+														<items>
+															<Text text="{Customertoolid}" class="SvoListText labelColorBlack" />
+														</items>
+													</FlexBox>
+												</items>
+											</FlexBox>
+											<!-- Start of PCR018233 changes -->
+											<!-- <FlexBox width="100%"> <items> <FlexBox width="40%" alignItems="Center"> -->
+											<FlexBox width="100%" class="svMasterListLabels">
+												<items>
+													<FlexBox width="43%" alignItems="End" height="1.3rem">
+														<!-- End of PCR018233 changes -->
+														<items>
+															<Label text="{i18n>DashBoard.serialNumber}" class="SvoListLabel" />
+														</items>
+													</FlexBox>
+													<!-- <FlexBox width="60%"> --> <!-- PCR018233~~ -->
+													<FlexBox width="57%"> <!-- PCR018233++ -->
+														<items>
+															<Text text="{Serialnumber}" class="SvoListText labelColorBlack" />
+														</items>
+													</FlexBox>
+												</items>
+											</FlexBox>
+											<!-- PCR017285 changes start -->
+											<!-- Start of PCR018233 changes -->
+											<!-- <FlexBox width="100%"> <items> <FlexBox width="40%" alignItems="Center"> -->
+											<FlexBox width="100%" class="svMasterListLabels">
+												<items>
+													<FlexBox width="43%" alignItems="End" height="1.3rem">
+														<!-- End of PCR018233 changes -->
+														<items>
+															<Label text="{i18n>ServiceOrder.fabName}" class="SvoListLabel" />
+														</items>
+													</FlexBox>
+													<!-- <FlexBox width="60%"> --> <!-- PCR018233~~ -->
+													<FlexBox width="57%"> <!-- PCR018233++ -->
+														<items>
+															<Text text="{Fabnamedescription}" class="SvoListText labelColorBlack" />
+														</items>
+													</FlexBox>
+												</items>
+											</FlexBox>
+											<!-- PCR017285 changes end -->
+											<FlexBox width="100%" direction="Column" class="svMasterListLabels">
+												<items>
+													<Label text="{i18n>DashBoard.problemDescription}"
+														class="SvoListLabel svMasterListLabels" />
+													<Label text="{Problemdescription}" class="SvoListText labelColorBlack" />
+												</items>
+											</FlexBox>
+											<!-- PCR018233; Adding Flag for Part and Labor Esc changes -->
+											<FlexBox width="100%">
+												<items>
+													<core:Icon src="sap-icon://mirrored-task-circle-2"
+														class="LegacyIconStyle" visible="{=${LegacyOrdNo} ? true : false}" />
+													<core:Icon src="sap-icon://flag" class="laborEsc" tooltip="{i18n>ServiceOrder.tchSrh}"
+														visible="{= ${TechEsc} === 'X' ? true : false}" />
+													<core:Icon src="sap-icon://flag" class="partEsc"
+														visible="{= ${PartEsc} === 'X' ? true : false}"  tooltip="{i18n>ServiceOrder.partEsc}"/>
+												</items>
+											</FlexBox>
+											<!-- End of PCR018233 changes -->
+										</items>
+									</FlexBox>
+								</content>
+							</CustomListItem>
+						</items>
+					</List>
+				</items>
+			</FlexBox>
+		</content>
+		<footer>
+			<Toolbar>
+				<Button icon="sap-icon://inspection" text="{i18n>DashBoard.advanceSearch}"
+					press="onAdvanceSearch" class="btnIcon" />
+				<ToolbarSpacer />
+				<Button icon="sap-icon://refresh" tooltip="Refresh List"
+					press="_resetMasterList" class="btnIcon" id="_resetListBtn"></Button>
+				<Button id="_sortBtn" icon="sap-icon://sort" press="onSort"
+					class="btnIcon" />
+				<Button id="_filterBtn" icon="sap-icon://action-settings"
+					press="onFilter" class="btnIcon" />
+			</Toolbar>
+		</footer>
+	</Page>
+</core:View>

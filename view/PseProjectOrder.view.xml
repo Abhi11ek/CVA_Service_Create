@@ -1,0 +1,10 @@
+<!-- ************************************************************************
+ *    Date  	Author    		PCR No.     Description of change			*
+ * **********	************	*********	******************************* *
+ * 12/01/2020	Vimal Pandu    	PCR032539   PSE Sprint 10 changes			*
+ * *********************************************************************** -->
+  
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" 
+	controllerName="serviceCaseCreation.controller.PseProjectOrder">
+	<VBox id="idPseCompCont"/>
+</core:View>

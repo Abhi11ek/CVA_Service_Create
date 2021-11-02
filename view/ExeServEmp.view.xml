@@ -1,0 +1,252 @@
+<!-- /******************************************************************
+*  Date        Author    PCR No.          Description of change        *
+************ ********  **********   ************************************
+* 11/06/2018   X087924   PCR018422   Exe. Service Employee Addition    *
+*									 changes 						   *
+* 12/17/2020   X0108534  PCR032448   FSO Productivity Super RIT	   *
+************************************************************************/ -->
+
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="serviceCaseCreation.controller.ExeServEmp"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<!-- Begin of PCR032448++ -->	
+	<Panel expandable="true" id="idDisplayESEListPanel" expanded="false" width="auto" class="sapUiResponsiveMargin sapUiSizeCompact">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Text id="idESEHeader" class="attachmentTitle esePadding" wrapping="true" />
+				<ToolbarSpacer />
+				<Button icon="sap-icon://save" text="{i18n>CreateServiceCase.Save}"
+									type="Transparent" press="onSaveESE" class="transparentBtnStyle"
+									id="idSaveESEBtn" />
+				<Button icon="sap-icon://add" text="{i18n>ServiceOrder.addExeSrvEmp}"
+									type="Transparent" press="onPressAddESE" class="transparentBtnStyle"
+									id="idAddESEBtn" />
+			</Toolbar>
+		</headerToolbar>
+		<content>
+	<!-- End of PCR032448++ -->
+	<FlexBox height="100%" direction="Column">
+		<items>
+			<!-- <OverflowToolbar>
+				<FlexBox width="100%">
+					<items>
+						<FlexBox width="{= ${device>/isPhone} ? '55%' : '25%'}"
+							height="3rem" justifyContent="Start" alignItems="Center">
+							<items>
+								<Text id="idESEHeader" class="attachmentTitle esePadding"
+									wrapping="true" />
+							</items>
+						</FlexBox>
+						<FlexBox width="{= ${device>/isPhone} ? '45%' : '75%'}"
+							justifyContent="End">
+							<items>
+								<Button icon="sap-icon://save" text="{i18n>CreateServiceCase.Save}"
+									type="Transparent" press="onSaveESE" class="transparentBtnStyle"
+									id="idSaveESEBtn" />
+								<Button icon="sap-icon://add" text="{i18n>ServiceOrder.add}"
+									type="Transparent" press="onPressAddESE" class="transparentBtnStyle"
+									id="idAddESEBtn" />
+							</items>
+						</FlexBox>
+					</items>
+				</FlexBox>
+			</OverflowToolbar> PCR032448~~ -->
+			<FlexBox class="iconTabsBackgroundColor" direction="Column">
+				<items>
+					<FlexBox width="{= ${device>/isPhone} ? '97%' : '99%'}"
+						alignItems="Center" class="emailFlex" id="idEmailInpFlex">
+						<items>
+							<FlexBox width="{= ${device>/isPhone} ? '100%' : '50%'}">
+								<items>
+									<MultiInput enableMultiLineMode="true"
+										change="onInputLiveChangeEmail" showSuggestion="{= ${device>/system/phone} ? true : false}"
+										width="98.5%" placeholder="{i18n>enterEmail}" id="idAddESEList"
+										showValueHelp="false" valueStateText="{i18n>validEmailIds}"
+										liveChange="onInputLiveChangeEmail" class="pdlList">
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</MultiInput>
+								</items>
+							</FlexBox>
+							<FlexBox width="{= ${device>/isPhone} ? '3rem' : '49%'}"
+								justifyContent="End">
+								<items>
+									<core:Icon src="sap-icon://sys-cancel" color="#cc1919"
+										size="1.5rem" press="onPressEmailDelIcon" class="sapUiTinyMarginEnd"/>
+								</items>
+							</FlexBox>
+						</items>
+					</FlexBox>
+					<List id="idDisplayESEList" items="{path:'/d/results',filters: [{ path: 'Partnerdet',operator: 'EQ',value1: '0052'}]}" noDataText=" "
+						mode="None" growing="true" growingScrollToLoad="true"
+						updateFinished="onESEListUpdateFinished">
+						<items>
+							<CustomListItem type="Inactive" class="eseList">
+								<content>
+									<FlexBox class="sapUiTinyMargin" direction="Column"
+										visible="{= ${ErrorMessage} ? true : false}" width="98.75%"
+										justifyContent="Center" alignItems="Center">
+										<items>
+											<Text text="{ErrorMessage}" class="esePadding eseErrorFont" />
+										</items>
+									</FlexBox>
+									<FlexBox width="98.75%"
+										height="{= ${device>/isPhone} ? '3rem' : '1.75rem'}" class="sapUiTinyMargin"
+										alignItems="{= ${device>/isPhone} ? 'Start' : 'Center'}"
+										direction="{= ${device>/isPhone} ? 'Column' : 'Row'}" visible="{= ${ErrorMessage} ? false : true}">
+										<items>
+											<FlexBox width="{= ${device>/isPhone} ? '100%' : '50%'}">
+												<items>
+													<Text text="{Fullname}" class="esePadding emailText" />
+												</items>
+											</FlexBox>
+											<FlexBox width="{= ${device>/isPhone} ? '100%' : '50%'}">
+												<items>
+													<Text text="{= ${Email}.toLowerCase()}" class="esePadding" />
+												</items>
+											</FlexBox>
+										</items>
+									</FlexBox>
+								</content>
+							</CustomListItem>
+						</items>
+					</List>
+				</items>
+			</FlexBox>
+		</items>
+	</FlexBox>
+	<!-- Begin of PCR032448++ -->
+	</content>
+	</Panel>	
+	<Panel expandable="true" id="idDisplayCEListPanel" expanded="false" headerText="{i18n>LeadCE}" width="auto" class="sapUiResponsiveMargin sapUiSizeCompact">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Text id="idLeadCEHeader" class="attachmentTitle esePadding" wrapping="true" />				
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<List id="idDisplayCEList" items="{path:'/d/results',filters: [{ path: 'Partnerdet',operator: 'EQ',value1: '0001'}]}" noDataText=" "
+						mode="None" growing="true" growingScrollToLoad="true"
+						updateFinished="onCEListUpdateFinished">
+						<items>
+							<CustomListItem type="Inactive" class="eseList">
+								<content>
+									<FlexBox class="sapUiTinyMargin" direction="Column"
+										visible="{= ${ErrorMessage} ? true : false}" width="98.75%"
+										justifyContent="Center" alignItems="Center">
+										<items>
+											<Text text="{ErrorMessage}" class="esePadding eseErrorFont" />
+										</items>
+									</FlexBox>
+									<FlexBox width="98.75%"
+										height="{= ${device>/isPhone} ? '3rem' : '1.75rem'}" class="sapUiTinyMargin"
+										alignItems="{= ${device>/isPhone} ? 'Start' : 'Center'}"
+										direction="{= ${device>/isPhone} ? 'Column' : 'Row'}" visible="{= ${ErrorMessage} ? false : true}">
+										<items>
+											<FlexBox width="{= ${device>/isPhone} ? '100%' : '50%'}">
+												<items>
+													<Text text="{Fullname}" class="esePadding emailText" />
+												</items>
+											</FlexBox>
+											<FlexBox width="{= ${device>/isPhone} ? '100%' : '50%'}">
+												<items>
+													<Text text="{= ${Email}.toLowerCase()}" class="esePadding" />
+												</items>
+											</FlexBox>
+										</items>
+									</FlexBox>
+								</content>
+							</CustomListItem>
+						</items>
+					</List>
+		</content>
+	</Panel>
+	<Panel expandable="true" id="idDisplayTMListPanel" expanded="false" headerText="{i18n>ToolManager}" width="auto" class="sapUiResponsiveMargin sapUiSizeCompact">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Text id="idTMHeader" class="attachmentTitle esePadding" wrapping="true" />				
+			</Toolbar>
+		</headerToolbar>
+		<content>
+		<List id="idDisplayTMList" items="{path:'/d/results',filters: [{ path: 'Partnerdet',operator: 'EQ',value1: '0002'}]}" noDataText=" "
+						mode="None" growing="true" growingScrollToLoad="true"
+						updateFinished="onTMListUpdateFinished">
+						<items>
+							<CustomListItem type="Inactive" class="eseList">
+								<content>
+									<FlexBox class="sapUiTinyMargin" direction="Column"
+										visible="{= ${ErrorMessage} ? true : false}" width="98.75%"
+										justifyContent="Center" alignItems="Center">
+										<items>
+											<Text text="{ErrorMessage}" class="esePadding eseErrorFont" />
+										</items>
+									</FlexBox>
+									<FlexBox width="98.75%"
+										height="{= ${device>/isPhone} ? '3rem' : '1.75rem'}" class="sapUiTinyMargin"
+										alignItems="{= ${device>/isPhone} ? 'Start' : 'Center'}"
+										direction="{= ${device>/isPhone} ? 'Column' : 'Row'}" visible="{= ${ErrorMessage} ? false : true}">
+										<items>
+											<FlexBox width="{= ${device>/isPhone} ? '100%' : '50%'}">
+												<items>
+													<Text text="{Fullname}" class="esePadding emailText" />
+												</items>
+											</FlexBox>
+											<FlexBox width="{= ${device>/isPhone} ? '100%' : '50%'}">
+												<items>
+													<Text text="{= ${Email}.toLowerCase()}" class="esePadding" />
+												</items>
+											</FlexBox>
+										</items>
+									</FlexBox>
+								</content>
+							</CustomListItem>
+						</items>
+					</List>
+		</content>
+	</Panel>
+	<Panel expandable="true" id="idDisplaySTListPanel" expanded="false" headerText="{i18n>ServiceTeam}" width="auto" class="sapUiResponsiveMargin sapUiSizeCompact">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Text id="idSTHeader" class="attachmentTitle esePadding" wrapping="true" />				
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<List id="idDisplaySTList" items="{path:'/d/results',filters: [{ path: 'Partnerdet',operator: 'EQ',value1: '0056'}]}" noDataText=" "
+						mode="None" growing="true" growingScrollToLoad="true"
+						updateFinished="onSTListUpdateFinished">
+						<items>
+							<CustomListItem type="Inactive" class="eseList">
+								<content>
+									<FlexBox class="sapUiTinyMargin" direction="Column"
+										visible="{= ${ErrorMessage} ? true : false}" width="98.75%"
+										justifyContent="Center" alignItems="Center">
+										<items>
+											<Text text="{ErrorMessage}" class="esePadding eseErrorFont" />
+										</items>
+									</FlexBox>
+									<FlexBox width="98.75%"
+										height="{= ${device>/isPhone} ? '3rem' : '1.75rem'}" class="sapUiTinyMargin"
+										alignItems="{= ${device>/isPhone} ? 'Start' : 'Center'}"
+										direction="{= ${device>/isPhone} ? 'Column' : 'Row'}" visible="{= ${ErrorMessage} ? false : true}">
+										<items>
+											<FlexBox width="{= ${device>/isPhone} ? '100%' : '50%'}">
+												<items>
+													<Text text="{Fullname}" class="esePadding emailText" />
+												</items>
+											</FlexBox>
+											<FlexBox width="{= ${device>/isPhone} ? '100%' : '50%'}">
+												<items>
+													<Text text="{= ${Email}.toLowerCase()}" class="esePadding" />
+												</items>
+											</FlexBox>
+										</items>
+									</FlexBox>
+								</content>
+							</CustomListItem>
+						</items>
+					</List>
+		</content>
+	</Panel>
+	<!-- End of PCR032448++ -->
+</core:View>

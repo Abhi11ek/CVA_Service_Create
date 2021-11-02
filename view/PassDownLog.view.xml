@@ -1,0 +1,129 @@
+<!-- *********************************************************************
+ *    Date       Author    PCR No.           Description of change       *
+ * **********  ********** *********    ***********************************
+ * 08/01/2018  X087924    PCR018422    Initial Version					 *
+ * *********************************************************************** -->
+
+<mvc:View controllerName="serviceCaseCreation.controller.PassDownLog"
+	xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout"
+	xmlns:rte="sap.ui.richtexteditor" xmlns:core="sap.ui.core">
+	<FlexBox width="100%" height="100%" class="passDownLogTabPadding"
+		direction="Column">
+		<items>
+			<FlexBox id="passDownTextBox" width="100%" direction="Column"
+				visible="{passDownLogView>/bDisableElements}">
+				<items>
+					<FlexBox width="100%" direction="Column" class="sapUiTinyMarginBottom">
+						<items>
+							<Text wrapping="true"
+								text="{i18n>ServiceOrder.eseTab} {i18n>ServiceOrder.note}"
+								class="pdlLabel sapUiTinyMarginBottom" />
+							<TextArea id="passDownTextArea" width="100%" liveChange="onLiveChange"
+								placeholder="{i18n>enterPassDownNotes}" rows="4" maxLength="2048"></TextArea>
+						</items>
+					</FlexBox>
+					<FlexBox justifyContent="{= ${device>/isPhone} ? 'Center' : 'End'}">
+						<items>
+							<Button text="{i18n>savePassDownNote}" press="onPressPassDownNoteSend"
+								type="Emphasized" class="sapUiTinyMarginEnd pdlNoteBtns passDownLogBtnsWidth"
+								enabled="{passDownLogView>/bDisableElements}" />
+							<Button text="{i18n>clear}" press="onPressPassDownNoteClear"
+								class="pdlNoteBtns passDownLogBtnsWidth" enabled="{passDownLogView>/bDisableElements}" />
+						</items>
+					</FlexBox>
+				</items>
+			</FlexBox>
+			<Text wrapping="true" text="{passDownLogView>/title}" class="pdlLabel sapUiTinyMargin" />
+			<FlexBox class="iconTabsBackgroundColor" direction="Column">
+				<items>
+					<List id="passDownLogList" items="{/d/results}"
+						busyIndicatorDelay="{passDownLogView>/delay}" noDataText="{passDownLogView>/noDataText}"
+						mode="None" growing="true" growingScrollToLoad="true"
+						updateFinished="onUpdateFinished" class="pdlList">
+						<items>
+							<CustomListItem type="Inactive" class="pdlCustomList">
+								<content>
+									<FlexBox class="pdlFlexBox" direction="Column">
+										<items>
+											<FlexBox height="3.25rem" alignItems="Center">
+												<items>
+													<FlexBox width="3.5rem" class="sapUiTinyMarginBegin"
+														alignItems="Start">
+														<items>
+															<core:Icon src="sap-icon://leads" color="#ffffff"
+																size="1.5rem" class="pdlListIcon" />
+														</items>
+													</FlexBox>
+													<FlexBox width="100%" class="sapUiTinyMarginBegin">
+														<items>
+															<FlexBox direction="Column" width="100%">
+																<items>
+																	<Text wrapping="true" text="{Username}" class="pdlLabel pdlListLabel" />
+																	<Label
+																		text="{path: 'Timestamp', formatter : 'serviceCaseCreation.formatter.formatter.passDownLogDateFormat'}"
+																		class="passDownLogLabel" />
+																</items>
+															</FlexBox>
+															<FlexBox width="70%"
+																visible="{= ${ConfirmationNumber} &amp;&amp; ${NoteType} &amp;&amp; ${device>/isNoPhone} ? true : false}">
+																<items>
+																	<FlexBox width="50%" direction="Column"
+																		visible="{= (${device>/isPhone} || ${device>/isTablet} &amp;&amp; ${device>/isNotDesktop}) ? false : true}"
+																		justifyContent="Center">
+																		<items>
+																			<Text wrapping="true" text="{i18n>psdnConfirmationNumber}"
+																				class="pdlLabel pdlListLabel" />
+																			<Text wrapping="true" text="{ConfirmationNumber}" />
+																		</items>
+																	</FlexBox>
+																	<FlexBox width="50%" direction="Column"
+																		visible="{= (${device>/isPhone} || ${device>/isTablet} &amp;&amp; ${device>/isNotDesktop}) ? false : true}"
+																		justifyContent="Center">
+																		<items>
+																			<Text wrapping="true" text="{i18n>psdnNoteType}"
+																				class="pdlLabel pdlListLabel" />
+																			<Text wrapping="true" text="{NoteType}" />
+																		</items>
+																	</FlexBox>
+																</items>
+															</FlexBox>
+														</items>
+													</FlexBox>
+												</items>
+											</FlexBox>
+											<FlexBox width="100%"
+												visible="{= ${ConfirmationNumber} &amp;&amp; ${NoteType} &amp;&amp; ((${device>/isPhone} || ${device>/isTablet} &amp;&amp; ${device>/isNotDesktop})) ? true : false}"
+												class="sapUiTinyMarginTopBottom">
+												<items>
+													<FlexBox direction="Column" width="100%"
+														class="sapUiTinyMarginBeginEnd"
+														visible="{= (${device>/isPhone} || ${device>/isTablet} &amp;&amp; ${device>/isNotDesktop}) ? true : false}">
+														<items>
+															<Text wrapping="true" text="{i18n>psdnConfirmationNumber}"
+																class="pdlLabel pdlListLabel" />
+															<Text wrapping="true" text="{ConfirmationNumber}" />
+														</items>
+													</FlexBox>
+													<FlexBox direction="Column" width="100%"
+														visible="{= (${device>/isPhone} || ${device>/isTablet} &amp;&amp; ${device>/isNotDesktop}) ? true : false}">
+														<items>
+															<Text wrapping="true" text="{i18n>psdnNoteType}"
+																class="pdlLabel pdlListLabel" />
+															<Text wrapping="true" text="{NoteType}" />
+														</items>
+													</FlexBox>
+												</items>
+											</FlexBox>
+											<Text text="{Noteslog}" wrapping="true"
+												class="sapUiTinyMarginTopBottom sapUiTinyMarginBeginEnd" />
+										</items>
+									</FlexBox>
+								</content>
+							</CustomListItem>
+						</items>
+					</List>
+				</items>
+			</FlexBox>
+		</items>
+	</FlexBox>
+</mvc:View>

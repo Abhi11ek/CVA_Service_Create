@@ -1,0 +1,896 @@
+/** ---------------------------------------------------------------------------------- *
+* Modifications.                                                                       *
+* -------------                                                                        *
+* Ver.No    Date        Author  	  PCR No.           Description of change          *
+* ------ ---------- ------------ ----------  ----------------------------------------- *
+* V00    13/10/2016   Siva Prasad													   *
+* 					Prachuri/Alok 		PCR012146				initial version 	   *
+*                     (X087050)                                                        *
+****************************************************************************************
+************************************************************************
+*  Date        Author    PCR No.          Description of change        *
+************ ********  **********   ************************************
+* 01/13/2018  X087924   PCR017437    PBG and Technology fields addition*
+* 05/28/2018  X087924   PCR018233    Cross App Navigation Buttons 	   *
+* 11/06/2018  X087924   PCR018233    Exe. Service Employee Addition    *
+*									 changes						   *
+* 07/17/2018  X087924   PCR018233	 Adding Part and Labor Flags       *
+* 08/01/2018  X087924   PCR018422    Pass Down Log and Attachments	   *
+*									 changes						   *
+* 11/19/2019  Vimal 	PCR020942	 KA Project changes 			   *
+* 			  Pandu 												   *
+* 09/22/2020  X0108356  PCR031702	IBase Implementation               *
+* 03/01/2021  X0108534  PCR034663   NSO and Labor cancellation         *
+* 03/18/2021  X0108534  PCR033903   FSO Q2                             *
+* 05/27/2021  X089025   PCR035464   Upgrade issue resolution           *
+************************************************************************/
+
+.asteriskCC:after {
+    content: " *";
+    color: red;
+    font-size: 1.0rem;
+}
+
+.miniMargin {
+    margin-right: 0.3rem !important;
+}
+
+.objectListItem {
+    margin: 0.25rem 0.25rem;
+    box-shadow: 0px 0px 0.5px grey !important;
+    border-bottom: 1px solid #f5f5f5 !important;
+}
+
+.noServiceCaseAvailableContainerText {
+    font-size: 1.3rem;
+    color: #666666 !important;
+}
+
+.serviCaseHighlight {
+    /* border-radius: 20px; PCR018233-- Adding Part and Labor Esc Flags */
+    border-radius: 0.25rem;
+    /* PCR018233++ */
+    background: #80DEEA !important;
+    /* PCR018233++ */
+    font-weight: bold;
+    padding: 0.25rem !important;
+    /* PCR018233++ */
+    /* padding: 4px !important; PCR018233--
+    width: 25px; PCR018233--
+    height: 15px; PCR018233-- */
+}
+
+.groupOrderList {
+    display: none !important;
+}
+
+#filterSettingsDialog-grouporderlist-listUl {
+    display: none !important;
+}
+
+.sapUiIcon:focus {
+    outline: 1px dashed rgba(255, 255, 255, 0);
+}
+
+.sapMTextNoWrap {
+    white-space: normal !important;
+}
+
+.sapMCLI:not(.sapMLIBNoFlex)>.sapMLIBContent {
+    width: 85% !important;
+}
+
+.sapMLIBImgNav {
+    width: 2.5rem !important;
+    font-size: 1.25rem !important;
+    color: #000000 !important;
+}
+
+.sapMSwtCont {
+    padding: 0.15rem 0 !important;
+}
+
+.sapMRb.sapMRbBTouched.sapMRbBout {
+    border-color: #ffffff !important;
+}
+
+.sapMSwtOff .sapMSwtHandle {
+    background: rgb(122, 128, 131);
+}
+
+.sapMSwtAcceptReject .sapMSwtHandle {
+    background: #ffffff !important;
+}
+
+.sapMSwtOff:not(.sapMSwtAcceptReject) {
+    background: #ffffff;
+    border-color: black !important;
+}
+
+#filterSettingsDialog-grouporderlist-listUl {
+    display: none !important;
+}
+
+.advanceSearchFlexBox {
+    background: #f2f2f2;
+}
+
+.advanceTitleFlexBox {
+    background: #c1ecff !important;
+}
+
+.dashBoardSubHeader {
+    margin-top: 0.5rem !important;
+}
+
+.dashboardSearchField {
+    height: 2.5rem;
+    padding: 0rem !important;
+}
+
+.dashboardSearchField form {
+    box-shadow: 0px 0px 0.5px grey !important;
+}
+
+.masterListFlexBox {
+    background-color: #f2f2f2;
+    margin-top: 0.5rem;
+}
+
+.greyLabelCC {
+    color: rgb(0, 0, 0) !important;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.lightGreyLabelCC {
+    color: rgb(108, 107, 107);
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.tabTitleLabel {
+    color: rgb(108, 107, 107);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.serviceOrder {
+    font-size: x-large;
+}
+
+.labelColorBlack {
+    color: black !important;
+}
+
+.SvoListLabel {
+    /* margin-top: 0.19rem; PCR018233--*/
+    font-size: 0.75rem;
+    color: #a0a0a0;
+}
+
+.serviceOrderListSVoCreate {
+    font-size: 1.25rem;
+}
+
+.probDesc {
+    margin: 0% 2.3% 0% 1%;
+}
+
+.SvoListText {
+    font-size: small;
+}
+
+.link {
+    text-decoration: underline;
+}
+
+.slimArrow {
+    margin-left: 0.25rem;
+}
+
+.smallMargin {
+    margin: 0.5rem;
+}
+
+.switchClass div {
+    height: 1.5rem !important;
+}
+
+.switchClass div div div:nth-child(3) {
+    height: 1rem !important;
+    width: 1rem !important;
+    left: 2.5rem !important;
+}
+
+.switchClass div div div span {
+    line-height: 1.5rem !important;
+}
+
+.partTitle {
+    font-size: x-large;
+}
+
+.partDetails {
+    font-weight: bold;
+}
+
+.partsListLabel {
+    color: #848e91 !important;
+}
+
+.filterSettingDialogResetFilterIcon {
+    display: none !important;
+}
+
+#filterSettingsDialog-resetbutton div {
+    padding-left: 0.75rem !important;
+}
+
+.mandatoryCheckRed {
+    color: red !important;
+}
+
+.mandatoryCheckBlack {
+    color: black !important;
+}
+
+.lightGreyBackground {
+    background: #F5F5F5;
+}
+
+.viewSettingRadioGroup>div {
+    width: 100% !important;
+    border-bottom: 1px solid grey;
+}
+
+.whiteBackground {
+    background-color: white !important;
+}
+
+.btnIcon div span {
+    color: #ffffff !important;
+}
+
+.flexBoxBackground {
+    background: #ffffff;
+}
+
+.size20 {
+    font-size: 20rem;
+}
+
+.comboWidth {
+    min-width: 100%;
+}
+
+.viewOrderLabel {
+    color: #000000 !important;
+}
+
+.prbDscFlxMbCC div:nth-child(1) {
+    max-width: calc(100% - 2%) !important;
+}
+
+.prbDscFlxMbCC div:nth-child(2) {
+    max-width: calc(100% - 2%) !important;
+}
+
+.prbDscFlxDsktCC div:nth-child(1),
+.prbDscFlxDsktCC div:nth-child(2) {
+    max-width: calc(100% - 1%) !important;
+}
+
+.noWrap {
+    white-space: nowrap !important;
+    color: rgb(0, 0, 0) !important;
+}
+
+.labelColorBlack1 {
+    color: black;
+    margin: 0.35rem;
+}
+
+.appliedTheme {
+    background: #c1ecff;
+}
+
+.serviceObjectHeader {
+    padding: 0rem !important;
+}
+
+.pageBackground {
+    background: #cceffa !important;
+}
+
+.confirmedQtyInput input {
+    height: 2rem !important;
+}
+
+.partsCustomList {
+    padding: 0.4rem;
+}
+
+.smallPaddingAll {
+    padding: 0.5rem;
+}
+
+.smallPadding {
+    padding: 0.5rem 0.5rem 0rem 0.5rem;
+}
+
+.emptyLabelMargin {
+    margin-top: 1rem;
+}
+
+.laborListHeader {
+    margin-left: 0.45rem;
+}
+
+.laborList {
+    margin: 0.5rem;
+}
+
+.laborListHeaderText {
+    font-size: 0.80rem;
+}
+
+.horizontalDivider {
+    height: .1rem;
+    background-color: #808080;
+}
+
+.viewSettingsDialog {
+    background: white;
+}
+
+.partsCustomListDescFlex {
+    margin-top: -1.25rem;
+}
+
+.tierDialogCss {
+    width: 17rem !important;
+    min-width: auto !important;
+}
+
+.dialogErrorText div {
+    max-width: 99% !important
+}
+
+.noServiceCaseAvailableContainerText {
+    font-size: 1.3rem;
+    color: #666666 !important;
+}
+
+.laborListAddLabor {
+    text-align: left;
+    font-size: 0.9rem;
+    margin: 0.2rem;
+    color: #2bc1e6;
+}
+
+.laborListHideNavBtn>span {
+    display: none !important;
+}
+
+.viewSettingDialogClearFilters div span {
+    font-size: smaller;
+}
+
+.navToAppsStyleCaseCreation {
+    color: #ffffff;
+    width: 3rem;
+    line-height: 2.7rem !important;
+    margin: 0.4rem 0.4rem 0rem 0.4rem;
+    box-shadow: -0.2rem 0.5rem 0.7rem grey !important;
+}
+
+.POIconStyle {
+    background-color: #e52929;
+}
+
+.SCCIconStyle {
+    background-color: #007cc0
+}
+
+.PRIconStyle {
+    background-color: #f0ab00
+}
+
+.smallPaddingStyle {
+    padding: 0.4rem;
+}
+
+.svoHeader {
+    background: #c1ecff !important;
+    box-shadow: inset 0 -0.0625rem #c1ecff !important;
+}
+
+.headerStatusStyle>div:nth-child(1) {
+    line-height: 1.8rem !important;
+}
+
+.headerStatusStyle>div:nth-child(2) {
+    line-height: 1rem !important;
+}
+
+.marginLeftSvoOrder {
+    margin-left: 0.25rem;
+}
+
+.lineHeightStyle {
+    line-height: 2.3rem !important;
+}
+
+.infoDialogMobile {
+    margin: 0.75rem;
+}
+
+.dialogErrorText {
+    line-height: 1.15rem !important;
+}
+
+.navToAppsBtnStyleCaseCreation>div {
+    line-height: 2.7rem !important;
+    /* margin: 0.4rem 0.4rem 0rem 0.4rem !important; */
+    /* PCR018233-- changes */
+    margin: 0.4rem 0rem 0rem 0.4rem !important;
+    /* PCR018233-- changes */
+    box-shadow: -0.2rem 0.5rem 0.7rem grey !important;
+    /* width : 8.5rem !important; */
+    /* PCR018233-- changes */
+}
+
+/* start of PCR016459 */
+
+.navToAppsBtnStyleCaseCreation>span {
+    line-height: 2.7rem !important;
+    /* margin: 0.4rem 0.4rem 0rem 0.4rem !important; */
+    /* PCR018233-- changes */
+    margin: 0.4rem 0rem 0rem 0.4rem !important;
+    /* PCR018233-- changes */
+    box-shadow: -0.2rem 0.5rem 0.7rem grey !important;
+    /* width : 8.5rem !important; */
+    /* PCR018233-- changes */
+}
+
+.rtenBtnStyle>div:nth-child(1),
+.rtenBtnStyle>div:nth-child(1)>span {
+    color: white !important;
+    background: rgba(240, 176, 0, 1) !important;
+}
+
+.rtenBtnStyle>span:nth-child(1),
+.rtenBtnStyle>span:nth-child(1)>span {
+    color: white !important;
+    background: rgba(240, 176, 0, 1) !important;
+}
+
+/* End of PCR016459 */
+
+/* PCR017437 changes start */
+
+.ccGridlayoutMargin>div {
+    margin: 0.25rem 0.5rem 0.45rem 0.5rem !important;
+}
+
+.ccGridlayoutTinyMarginBottom>div {
+    margin-bottom: 0rem !important;
+}
+
+.displayStyleNone {
+    display: none !important;
+}
+
+.displayStyleInLineGrid {
+    display: inline-grid !important;
+}
+
+/* PCR017437 changes end */
+
+/* Start of PCR018233++ changes */
+
+.transparentBtnStyle>span>span:nth-child(2),
+.transparentBtnStyle>div>span:nth-child(2) {
+    color: #000000 !important;
+}
+
+.iconTabsBackgroundColor {
+    background: #f2f2f2 !important;
+}
+
+.eseList {
+    margin: 0.35rem !important;
+    box-shadow: 0px 0px 0.5px grey !important;
+    border-bottom: 0px solid #f5f5f5 !important;
+}
+
+.eseTitle {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.eseInput {
+    padding: 0 !important;
+}
+
+.eseInput,
+.eseInput input,
+.eseInput>div {
+    height: 1.75rem !important;
+}
+
+.esePadding {
+    padding: 0.2rem;
+}
+
+.eseErrorFont {
+    font-size: 1rem !important;
+}
+
+.emailText {
+    color: rgba(0, 0, 0, 0.73) !important;
+    font-weight: bold !important;
+    font-size: 0.8rem !important;
+}
+
+.partEsc {
+    color: #009DE0 !important;
+    padding: 0.25rem;
+    margin: 0.25rem 0.35rem 0.15rem 0;
+}
+
+.laborEsc {
+    color: #f0ab00 !important;
+    padding: 0.25rem;
+    margin: 0.25rem 0.35rem 0.15rem 0;
+}
+
+.LegacyIconStyle {
+    color: #e52929 !important;
+    padding: 0.25rem 0.25rem 0.25rem 0;
+    margin: 0.25rem 0.35rem 0.15rem 0;
+}
+
+.svMasterListLabels {
+	margin-top: 0.14rem;
+}
+
+/* end of PCR018233++ changes */
+
+/* Start of PCR018422++ changes;
+ Pass Down Report and Attachment tabs */
+
+.pdlNoteBtns>span,
+.pdlNoteBtns>div {
+    height: 2rem !important;
+}
+
+.pdlNoteBtns>span>span,
+.pdlNoteBtns>div>span {
+    line-height: 1.95rem !important;
+}
+
+.passDownLogBtnsWidth,
+.passDownLogSendBtnsWidth {
+    width: 7.5rem;
+}
+
+.pdlLabel {
+    color: rgba(0, 0, 0, 0.73) !important;
+    font-weight: bold !important;
+    font-size: 0.8rem !important;
+}
+
+.iconTabsBackgroundColor {
+    background: #f2f2f2 !important;
+}
+
+.pdlList {
+    padding: 0.25rem !important;
+}
+
+.pdlCustomList {
+    margin: 0.25rem 0.1rem !important;
+    box-shadow: 0px 0px 0.5px grey;
+    border-bottom: 0px solid #f5f5f5;
+}
+
+.pdlFlexBox {
+    padding: 0.5rem;
+}
+
+.pdlListIcon {
+    box-shadow: 0px 1px 1px grey;
+    background-color: #007cc0;
+    padding: 9px;
+    width: 1.5rem;
+    height: 1.575rem;
+    border-radius: 25px;
+}
+
+.pdlListLabel {
+    font-size: 0.95rem !important;
+}
+
+.passDownLogLabel {
+    font-size: 0.75rem;
+    color: #a0a0a0;
+}
+
+.attachmentAttributes>span {
+    margin: 0.2rem 0 !important;
+}
+
+.attachmentTitle {
+    font-size: 1.1rem !important;
+}
+
+.attachmentsContainerHeight>div>div.sapMScrollCont {
+    overflow: overlay !important;
+}
+
+.attachmentsContainerHeight {
+    height: 26rem;
+}
+
+.attIconStyle {
+    padding: 0.4rem;
+    color: #666666;
+}
+
+.attachmentsPadding {
+    padding: 0.2rem;
+}
+
+.attPaddingBottom {
+    padding-bottom: 0.2rem;
+}
+
+.tmPckrMrgnTp {
+	margin-top: 1.08rem;
+}
+
+.emailFlex {
+	background-color: white;
+	box-shadow: 0px 0px 0.5px grey !important;
+	margin: 0.5rem 0.35rem 0.25rem 0.35rem;
+}
+
+/* End of PCR018422++ changes */
+
+/* Begin of PCR020942++ changes; KA Project changes */
+
+.partsListPaddingStyle {
+    padding: 0.25rem 0 !important;
+}
+
+.toolStatusEditView {
+	margin: 0rem !important;
+}
+
+.menuPopOverStandardList>div>div>div {
+    font-size: 0.875rem !important;
+}
+
+.menuPopOverLinkStyle {
+    color: #333333 !important;
+    padding: 0.65rem 0.25rem 0.3rem !important;
+}
+
+.menuPopOverLinkStyle.sapMLnk:hover:not(.sapMLnkDsbl) {
+    text-decoration: none !important;
+}
+
+.menuPopOverLinkStyle.sapMLnk:focus:not(.sapMLnkDsbl) {
+    outline: 0px dotted #000000 !important;
+}
+
+.scrollContOvelay {
+    overflow: overlay !important;
+    -ms-overflow-style: -ms-autohiding-scrollbar !important;
+}
+
+.menuPopOverStandardList>span.sapMLIBImgNav {
+    width: 3rem !important;
+    font-size: .8755rem !important;
+}
+
+.menuPopOverStandardList.sapMSLI {
+    height: 2.3rem !important;
+}
+
+.inputMenuStyle>input.sapMInputBaseInner {
+    border: 0px solid #bfbfbf !important;
+    padding: 0 0.75rem !important;
+}
+
+.inputMenuStyle.sapMInputBase {
+    height: 2.5rem !important;
+}
+
+.inputMenuStyle>div {
+    /*display: none !important;                                                             /* PCR035464-- */
+    border: none;                                                                           /* PCR035464++ */
+}
+
+.inputMenuStyleBtn.sapMBtn {
+    padding: 0 !important;
+    height: 2.5rem !important;
+}
+
+.inputMenuStyleBtn>span>span.sapMBtnIcon, .inputMenuStyleBtn>div>span.sapMBtnIcon {
+    font-size: 1rem !important;
+}
+
+.inputMenuCancelStyleBtn>div>span.sapMBtnIcon {
+	font-size: 1.375rem !important;
+}
+
+.inputMenuStyle.sapMInputBaseWidthPadding {
+    padding: 0 !important;
+}
+
+.inputMenuBorder {
+    border: 1px solid #bfbfbf;
+    border-radius: 1px;
+    background: #ffffff;
+}
+
+.inputMenuValueStateError {
+    border: 1.5px solid #e52929;
+    border-radius: 1px;
+    background: #ffffff;
+}
+
+.inputMenuMarginTop {
+	/*Start Of PCR035464 */
+	/*margin-top: 0.3rem;*/
+	margin-top: 0.1rem;
+	/*End Of PCR035464 */
+}
+
+.inputMenuPopoverHeight div:nth-child(2) {
+	height: auto !important;
+}
+
+.symHint {
+    padding: 0.1rem;
+    margin: 0 0.35rem;
+    width: 0.8rem;
+    background-color: #006ca7;
+    color: #ffffff;
+    border-radius: 0.6rem;
+}
+/* End of PCR020942++ changes */
+
+/* Begin of IBASE PCR031702++  */
+.ibViewMarginBottom {
+    margin-bottom: 0rem !important;
+}
+
+.ImtViewMarginBottom {
+    margin: 0rem !important;
+}
+
+.suggestBtnStyle {
+    height: 1.16rem !important;
+    padding: 0 !important;
+}
+.suggestBtnStyle div {
+    height: 1.4rem !important;
+}
+.suggestBtnStyle span{
+	line-height: 1.25rem !important;
+}
+.btnSubmit span{
+	color:#05c155  !important;	
+}
+
+.btnReject span{
+	color:red !important;
+}
+
+.suggestInpHeight,
+.suggestInpHeight>div {
+    height: 1.48rem !important;
+    padding-top: 0.0rem !important;
+}
+
+.suggestInpHeight input{
+	height:1.4rem !important;
+}
+.ibaseToolbar{
+	height:2rem !important;
+}
+
+.ibasePopup{
+	background-color:#c2e1fc;	
+}
+.btnAddAssembly span{
+	border-radius: 2rem;
+    color: #006ca7;
+    width: auto;
+    padding:0rem !important;
+}
+
+.ibPopMsgBar{
+	background: white !important;
+	padding: 0rem !important;
+}
+
+.ibPopMsgStrip{
+	width: 99.7%;
+    margin: 0rem !important;
+}
+
+.sapUiRespGrid.sapUiRespGridVSpace1 > div {
+    margin-bottom: 0rem !important;
+}
+
+.inpFlexMarginBottom{
+	margin-bottom: 1rem !important;
+}
+
+.asteriskIBase:after {
+    content: " *";
+    color: red;
+    font-weight: 700;
+}
+
+
+/*END of IBASE PCR031702++  */
+
+/*Begin of  PCR034663++  */
+
+.nsomargin{
+	margin-top: 11px !important;
+}
+
+/*END of PCR034663++  */
+
+/*Start of PCR033903++ changes*/
+
+ .svcCreate .sapMSplitContainerMaster {
+    width: 26rem;
+}
+
+.svcCreate .sapMSplitContainerPortrait.sapMSplitContainerShowHide>.sapMSplitContainerMasterHidden {
+    left: -6rem;
+}
+
+.segBtn .sapMSegB .sapMSegBBtn .sapMSegBBtnInner,
+.segBtn .sapMSegBBtn.sapMSegBBtnSel .sapMSegBBtnInner {
+	font-size: 0.75rem;
+}
+
+.masterListScrollCont {
+	height: calc(100% - 7vh) !important;
+}
+
+/*End of PCR033903++ changes*/
+
+/* Start Of PCR035464: Upgrade Issues Solution */
+.inputMenuMarginTop .inputMenuStyle .sapMInputBaseIcon {
+    display: none;
+}
+
+.rtenBtnStyle .sapMBtnTranaparent,
+.rtenTrpBtnStyle .sapMBtnTranaparent {
+    color: white !important;
+}
+
+.inputMenuMarginTop .inputMenuStyle.sapMInputBase {
+    height: 1.18rem !important;
+}
+
+.inputMenuMarginTop .inputMenuStyleBtn.sapMBtn {
+    height: 1.18rem !important;
+}
+
+.inputMenuMarginTop .sapMInputBaseContentWrapper {
+    background: transparent;
+    margin-top: -0.2em;
+}
+
+/* End Of PCR035464 : Upgrade Issues Solution */
